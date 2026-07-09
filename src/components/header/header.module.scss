@@ -1,0 +1,73 @@
+@use "../../styles/variables" as *;
+
+.header {
+  background: $primary-color;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  color: white;
+  margin-bottom: 2rem;
+  padding: 1.5rem 0;
+}
+
+.headerContent {
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
+  margin: 0 auto;
+  max-width: 1200px;
+  padding: 0 20px;
+}
+
+.title {
+  font-size: 2rem;
+  font-weight: 700;
+}
+
+.actions {
+  align-items: center;
+  display: flex;
+  gap: 1rem;
+}
+
+.themeToggle {
+  background: rgba(255, 255, 255, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: $border-radius;
+  color: white;
+  cursor: pointer;
+  font-size: 0.875rem;
+  padding: 0.5rem 1rem;
+  transition: $transition;
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.3);
+  }
+}
+
+.userMenu {
+  align-items: center;
+  display: flex;
+  gap: 1rem;
+}
+
+.userName {
+  font-weight: 600;
+}
+
+.logoutBtn {
+  background: rgba(255, 255, 255, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: $border-radius;
+  color: white;
+  cursor: pointer;
+  padding: 0.5rem 1rem;
+  transition: $transition;
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.3);
+  }
+}
+
+.guestText {
+  font-size: 0.875rem;
+  opacity: 0.8;
+}

@@ -1,0 +1,71 @@
+@use "../../../styles/variables" as *;
+
+.card {
+  background: $card-background;
+  border-radius: $border-radius;
+  box-shadow: $box-shadow;
+  padding: 1.5rem;
+  transition: $transition;
+  border-left: 4px solid $primary-color;
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+  }
+
+  &.notAttending {
+    border-left-color: $secondary-color;
+  }
+}
+
+.name {
+  margin-bottom: 0.5rem;
+  color: $text-color;
+}
+
+.detail {
+  color: $text-muted;
+  margin-bottom: 0.5rem;
+}
+
+.status {
+  font-weight: 600;
+}
+
+.actions {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: 1rem;
+}
+
+.editBtn {
+  padding: 0.5rem 1rem;
+  background: $secondary-color;
+  color: white;
+  border: none;
+  border-radius: $border-radius;
+  font-size: 0.875rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: $transition;
+
+  &:hover {
+    opacity: 0.9;
+  }
+}
+
+.deleteBtn {
+  padding: 0.5rem 1rem;
+  background: $danger-color;
+  color: white;
+  border: none;
+  border-radius: $border-radius;
+  font-size: 0.875rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: $transition;
+
+  &:hover {
+    opacity: 0.9;
+  }
+}
