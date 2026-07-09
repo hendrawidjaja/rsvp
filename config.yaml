@@ -1,0 +1,39 @@
+# ============================================
+# RSVP App - Central Configuration
+# ============================================
+
+# Server Ports
+frontend_port: 3000
+backend_port: 8080
+
+# Database
+database:
+  host: localhost
+  port: 5432
+  name: rsvp_db
+  user: rsvp_user
+  password: rsvp_password
+
+# Redis
+redis:
+  host: localhost
+  port: 6379
+
+# JWT Authentication
+jwt:
+  secret: your-super-secret-jwt-key-change-in-production
+  expiration_hours: 24
+
+# Password Policy
+password:
+  min_length: 8
+
+# RSVP Limits
+rsvp:
+  max_guests: 10
+  max_dietary_restrictions_length: 500
+  max_name_length: 100
+
+# Logging
+logging:
+  level: info

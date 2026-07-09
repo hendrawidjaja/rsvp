@@ -1,21 +1,21 @@
 import type { Metadata } from "next";
 import ClientLayout from "@/components/client-layout/ClientLayout";
 import "@/styles/globals.scss";
+import type { ReactNode } from "react";
 
 export const metadata: Metadata = {
-  title: "RSVP App",
   description: "Event RSVP Management Application",
+  title: "RSVP App",
 };
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html lang="en">
       <body>
-        <ClientLayout>{children}</ClientLayout>
+        <div className="container">
+          <ClientLayout>{children}</ClientLayout>
+        </div>
+        d
       </body>
     </html>
   );

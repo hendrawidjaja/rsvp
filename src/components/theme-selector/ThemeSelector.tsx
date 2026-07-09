@@ -1,47 +1,43 @@
 "use client";
 
+import Button from "@/atomic/Button";
 import { useAuthStore } from "@/stores/authStore";
 import { type Theme, useThemeStore } from "@/stores/themeStore";
-import styles from "./theme-selector.module.scss";
+import styles from "./styles.module.scss";
 
-const themes: { value: Theme; label: string; icon: string }[] = [
-  { icon: "☀️", label: "Light", value: "light" },
-  { icon: "🌙", label: "Dark", value: "dark" },
-];
+const themes = [
+  { icon: "☀️", label: "Light theme", value: "light" },
+  { icon: "🌙", label: "Dark theme", value: "dark" },
+] as const;
 
 export default function ThemeSelector() {
   const { theme, setTheme } = useThemeStore();
   const { isAuthenticated, updateTheme } = useAuthStore();
 
-  const handleThemeChange = async (newTheme: Theme) => {
-    setTheme(newTheme);
+  const select = async (next: Theme) => {
+    setTheme(next);
     if (isAuthenticated) {
       try {
-        await updateTheme(newTheme);
+        await updateTheme(next);
       } catch {
-        // Theme applied locally even if API fails
+        // theme applied locally even if api fails
       }
     }
   };
 
   return (
     <div className={styles.selector}>
-      <h3 className={styles.title}>Select Theme</h3>
-      <div className={styles.grid}>
-        {themes.map((t) => (
-          <button
-            aria-label={`${t.label} theme`}
-            className={`${styles.option} ${theme === t.value ? styles.active : ""}`}
-            key={t.value}
-            onClick={() => handleThemeChange(t.value)}
-            title={t.label}
-            type="button"
-          >
-            <span className={styles.icon}>{t.icon}</span>
-            <span className={styles.label}>{t.label}</span>
-          </button>
-        ))}
-      </div>
+      {themes.map(({ value, icon, label }) => (
+        <Button
+          ariaLabel={label}
+          className={`${styles.option} ${theme === value ? styles.active : ""}`}
+          key={value}
+          onClick={() => select(value)}
+          type="button"
+        >
+          {icon}
+        </Button>
+      ))}
     </div>
   );
 }
