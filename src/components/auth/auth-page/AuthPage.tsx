@@ -3,7 +3,7 @@
 import { useState } from "react";
 import LoginForm from "@/components/auth/login-form/LoginForm";
 import RegisterForm from "@/components/auth/register-form/RegisterForm";
-import styles from "./auth-page.module.scss";
+import styles from "./styles.module.scss";
 
 export default function AuthPage() {
   const [isLogin, setIsLogin] = useState(true);

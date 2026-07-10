@@ -4,7 +4,7 @@ import { useState } from "react";
 import { useRSVPStore } from "@/stores/rsvpStore";
 import RSVPForm from "@/components/rsvp/rsvp-form/RSVPForm";
 import RSVPCard from "@/components/rsvp/rsvp-card/RSVPCard";
-import styles from "./rsvp-list.module.scss";
+import styles from "./styles.module.scss";
 
 export default function RSVPList() {
   const [editingId, setEditingId] = useState<string | null>(null);

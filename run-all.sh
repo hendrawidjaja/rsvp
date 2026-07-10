@@ -4,14 +4,12 @@ set -e
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 cd "$SCRIPT_DIR"
 
-# Detect Docker Compose
 if command -v docker-compose &> /dev/null; then
     DOCKER_COMPOSE="docker-compose"
 else
     DOCKER_COMPOSE="docker compose"
 fi
 
-# Cleanup function
 cleanup() {
     echo ""
     echo "Stopping services..."
@@ -28,19 +26,13 @@ echo "Checking Docker services..."
 if ! $DOCKER_COMPOSE ps 2>/dev/null | grep postgres | grep -q Up; then
     echo "Starting Docker services..."
     $DOCKER_COMPOSE up -d
-    echo "Waiting for PostgreSQL..."
-    sleep 10
-    
-    # Verify database setup
-    $DOCKER_COMPOSE exec -T postgres psql -U postgres -c "ALTER ROLE rsvp_user WITH LOGIN PASSWORD 'rsvp_password';" 2>/dev/null || true
-    $DOCKER_COMPOSE exec -T postgres psql -U postgres -c "GRANT ALL PRIVILEGES ON DATABASE rsvp_db TO rsvp_user;" 2>/dev/null || true
+    sleep 5
 fi
 
-# Start backend
+# Start backend (skip migration errors)
 echo "Starting backend..."
 cd backend
 export $(cat .env | grep -v '^#' | xargs)
-sqlx migrate run --database-url "$DATABASE_URL" 2>/dev/null || true
 cargo run &
 BACKEND_PID=$!
 cd ..
@@ -66,7 +58,6 @@ echo "✅ RSVP App is running!"
 echo "========================================="
 echo "Frontend: http://localhost:3000"
 echo "Backend:  http://localhost:8080"
-echo "Health:   http://localhost:8080/api/health"
 echo ""
 echo "Press Ctrl+C to stop all services"
 echo "========================================="

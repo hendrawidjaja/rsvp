@@ -2,15 +2,14 @@
 
 .card {
   background: $card-background;
-  border-radius: $border-radius;
-  box-shadow: $box-shadow;
-  padding: 1.5rem;
-  transition: $transition;
   border-left: 4px solid $primary-color;
+  border-radius: $border-radius;
+  padding: 1rem;
+  transition: $transition;
 
   &:hover {
-    transform: translateY(-2px);
     box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+    transform: translateY(-2px);
   }
 
   &.notAttending {
@@ -19,8 +18,8 @@
 }
 
 .name {
-  margin-bottom: 0.5rem;
   color: $text-color;
+  margin-bottom: 0.5rem;
 }
 
 .detail {
@@ -39,14 +38,13 @@
 }
 
 .editBtn {
-  padding: 0.5rem 1rem;
   background: $secondary-color;
-  color: white;
   border: none;
   border-radius: $border-radius;
-  font-size: 0.875rem;
-  font-weight: 600;
+  color: white;
   cursor: pointer;
+  font-size: 0.875rem;
+  padding: 0.5rem 1rem;
   transition: $transition;
 
   &:hover {
@@ -55,14 +53,13 @@
 }
 
 .deleteBtn {
-  padding: 0.5rem 1rem;
   background: $danger-color;
-  color: white;
   border: none;
   border-radius: $border-radius;
-  font-size: 0.875rem;
-  font-weight: 600;
+  color: white;
   cursor: pointer;
+  font-size: 0.875rem;
+  padding: 0.5rem 1rem;
   transition: $transition;
 
   &:hover {

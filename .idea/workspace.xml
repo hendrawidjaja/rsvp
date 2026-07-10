@@ -4,7 +4,33 @@
     <option name="autoReloadType" value="ALL" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="44d81e7d-5ab9-4975-9852-8a66c0da2d14" name="Changes" comment="added several page.&#10;enhanced button" />
+    <list default="true" id="44d81e7d-5ab9-4975-9852-8a66c0da2d14" name="Changes" comment="enhanced button">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/db.rs" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/db.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/handlers.rs" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/handlers.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/models.rs" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/models.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/run-all.sh" beforeDir="false" afterPath="$PROJECT_DIR$/run-all.sh" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/layout.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/layout.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/auth/auth-page/AuthPage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/auth/auth-page/AuthPage.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/auth/auth-page/auth-page.module.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/auth/login-form/LoginForm.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/auth/login-form/LoginForm.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/auth/login-form/login-form.module.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/auth/register-form/RegisterForm.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/auth/register-form/RegisterForm.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/auth/register-form/register-form.module.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/auth/register-form/styles.module.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/client-layout/ClientLayout.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/client-layout/ClientLayout.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/client-layout/client-layout.module.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/client-layout/styles.module.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/header/Header.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/header/Header.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/rsvp/rsvp-card/RSVPCard.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/rsvp/rsvp-card/RSVPCard.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/rsvp/rsvp-card/rsvp-card.module.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/rsvp/rsvp-card/styles.module.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/rsvp/rsvp-form/RSVPForm.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/rsvp/rsvp-form/RSVPForm.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/rsvp/rsvp-form/rsvp-form.module.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/rsvp/rsvp-form/styles.module.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/rsvp/rsvp-list/RSVPList.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/rsvp/rsvp-list/RSVPList.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/rsvp/rsvp-list/rsvp-list.module.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/stats-display/stats-display.module.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/stats-display/stats-display.module.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/lib/api.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/api.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/lib/config.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/config.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/lib/schemas.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/schemas.ts" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -71,7 +97,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1783577695320</updated>
-      <workItem from="1783577696509" duration="15137000" />
+      <workItem from="1783577696509" duration="17370000" />
     </task>
     <task id="LOCAL-00001" summary="added new changes">
       <option name="closed" value="true" />
@@ -97,7 +123,15 @@
       <option name="project" value="LOCAL" />
       <updated>1783680512399</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="enhanced button">
+      <option name="closed" value="true" />
+      <created>1783689576336</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1783689576336</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -110,7 +144,8 @@
     <MESSAGE value="added new changes" />
     <MESSAGE value="added several page.&#10;enhance button" />
     <MESSAGE value="added several page.&#10;enhanced button" />
-    <option name="LAST_COMMIT_MESSAGE" value="added several page.&#10;enhanced button" />
+    <MESSAGE value="enhanced button" />
+    <option name="LAST_COMMIT_MESSAGE" value="enhanced button" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

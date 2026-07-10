@@ -4,7 +4,7 @@ import { type ReactNode, useEffect } from "react";
 import Header from "@/components/header/Header";
 import { useAuthStore } from "@/stores/authStore";
 import { useThemeStore } from "@/stores/themeStore";
-import styles from "./client-layout.module.scss";
+import styles from "./styles.module.scss";
 
 export default function ClientLayout({ children }: { children: ReactNode }) {
   const { fetchUser } = useAuthStore();

@@ -1,10 +1,10 @@
 import type { RSVP } from "@/lib/schemas";
-import styles from "./rsvp-card.module.scss";
+import styles from "./styles.module.scss";
 
 interface RSVPCardProps {
-  rsvp: RSVP;
-  onEdit: (id: string) => void;
   onDelete: (id: string) => void;
+  onEdit: (id: string) => void;
+  rsvp: RSVP;
 }
 
 export default function RSVPCard({ rsvp, onEdit, onDelete }: RSVPCardProps) {
@@ -33,16 +33,16 @@ export default function RSVPCard({ rsvp, onEdit, onDelete }: RSVPCardProps) {
       </p>
       <div className={styles.actions}>
         <button
-          type="button"
-          onClick={() => onEdit(rsvp.id)}
           className={styles.editBtn}
+          onClick={() => onEdit(rsvp.id)}
+          type="button"
         >
           Edit
         </button>
         <button
-          type="button"
-          onClick={() => onDelete(rsvp.id)}
           className={styles.deleteBtn}
+          onClick={() => onDelete(rsvp.id)}
+          type="button"
         >
           Delete
         </button>

@@ -15,25 +15,14 @@ pub fn config(cfg: &mut web::ServiceConfig) {
             .route("/auth/login", web::post().to(login))
             .route("/auth/me", web::get().to(get_current_user))
             .route("/auth/theme", web::put().to(update_theme))
+            .route("/auth/forgot-password", web::post().to(forgot_password))
+            .route("/auth/reset-password", web::post().to(reset_password))
             .route("/health", web::get().to(health_check))
-            .route("/config", web::get().to(get_config))
     );
 }
 
 async fn health_check() -> HttpResponse {
     HttpResponse::Ok().json(ApiResponse::success("Server is running"))
-}
-
-async fn get_config(state: web::Data<AppState>) -> HttpResponse {
-    HttpResponse::Ok().json(serde_json::json!({
-        "app": {
-            "name": "RSVP App",
-            "version": "1.0.0"
-        },
-        "server_port": state.config.server_port,
-        "database_host": "localhost",
-        "redis_host": "localhost"
-    }))
 }
 
 async fn register(
@@ -77,6 +66,39 @@ async fn login(
     })))
 }
 
+async fn forgot_password(
+    state: web::Data<AppState>,
+    body: web::Json<ForgotPasswordRequest>,
+) -> Result<HttpResponse, AppError> {
+    body.validate()?;
+
+    // Always return success even if email doesn't exist (security best practice)
+    if let Ok(_user) = db::get_user_by_email(&state.db, &body.email).await {
+        let _token = db::generate_reset_token(&state.db, &body.email).await?;
+        // In production, send email with reset link here
+        log::info!("Password reset token generated for {}", body.email);
+    }
+
+    Ok(HttpResponse::Ok().json(ApiResponse::success(
+        "If the email exists, a password reset link has been sent."
+    )))
+}
+
+async fn reset_password(
+    state: web::Data<AppState>,
+    body: web::Json<ResetPasswordRequest>,
+) -> Result<HttpResponse, AppError> {
+    body.validate()?;
+
+    let _user = db::get_user_by_reset_token(&state.db, &body.token)
+        .await
+        .map_err(|_| AppError::BadRequest("Invalid or expired reset token".to_string()))?;
+
+    db::reset_password(&state.db, &body.token, &body.password).await?;
+
+    Ok(HttpResponse::Ok().json(ApiResponse::success("Password reset successfully")))
+}
+
 async fn get_current_user(
     state: web::Data<AppState>,
     req: HttpRequest,
@@ -94,7 +116,7 @@ async fn update_theme(
 ) -> Result<HttpResponse, AppError> {
     body.validate()?;
 
-    let valid_themes = vec!["light", "dark", "blue", "green", "purple", "high-contrast"];
+    let valid_themes = vec!["light", "dark"];
     if !valid_themes.contains(&body.theme.as_str()) {
         return Err(AppError::BadRequest(format!(
             "Invalid theme. Valid themes: {}",

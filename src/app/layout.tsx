@@ -15,7 +15,6 @@ export default function RootLayout({ children }: { children: ReactNode }) {
         <div className="container">
           <ClientLayout>{children}</ClientLayout>
         </div>
-        d
       </body>
     </html>
   );

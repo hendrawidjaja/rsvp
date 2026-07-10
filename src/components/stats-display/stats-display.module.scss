@@ -2,8 +2,8 @@
 
 .container {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   gap: 1.5rem;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   margin-bottom: 2rem;
 }
 
@@ -16,14 +16,14 @@
 }
 
 .value {
-  font-size: 2rem;
   color: $primary-color;
+  font-size: 2rem;
   margin-bottom: 0.5rem;
 }
 
 .label {
   color: $text-muted;
   font-size: 0.875rem;
-  text-transform: uppercase;
   letter-spacing: 0.5px;
+  text-transform: uppercase;
 }
