@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Input from "@/atomic/Input/Input";
 import { registerSchema } from "@/lib/schemas";
 import { useAuthStore } from "@/stores/authStore";
 import styles from "./styles.module.scss";
@@ -39,51 +40,36 @@ export default function RegisterForm() {
 
       {error && <div className={styles.error}>{error}</div>}
 
-      <div className={styles.field}>
-        <label htmlFor="register-name">Name</label>
-        <input
-          className={styles.input}
-          id="register-name"
-          onChange={(e) => setName(e.target.value)}
-          required
-          type="text"
-          value={name}
-        />
-        {errors.name && (
-          <span className={styles.fieldError}>{errors.name}</span>
-        )}
-      </div>
+      <Input
+        id="register-name"
+        label="Name"
+        type="text"
+        value={name}
+        onChange={(e) => setName(e.target.value)}
+        error={errors.name}
+        required
+      />
 
-      <div className={styles.field}>
-        <label htmlFor="register-email">Email</label>
-        <input
-          className={styles.input}
-          id="register-email"
-          onChange={(e) => setEmail(e.target.value)}
-          required
-          type="email"
-          value={email}
-        />
-        {errors.email && (
-          <span className={styles.fieldError}>{errors.email}</span>
-        )}
-      </div>
+      <Input
+        id="register-email"
+        label="Email"
+        type="email"
+        value={email}
+        onChange={(e) => setEmail(e.target.value)}
+        error={errors.email}
+        required
+      />
 
-      <div className={styles.field}>
-        <label htmlFor="register-password">Password</label>
-        <input
-          className={styles.input}
-          id="register-password"
-          minLength={8}
-          onChange={(e) => setPassword(e.target.value)}
-          required
-          type="password"
-          value={password}
-        />
-        {errors.password && (
-          <span className={styles.fieldError}>{errors.password}</span>
-        )}
-      </div>
+      <Input
+        id="register-password"
+        label="Password"
+        type="password"
+        value={password}
+        onChange={(e) => setPassword(e.target.value)}
+        error={errors.password}
+        required
+        minLength={8}
+      />
 
       <button className={styles.submitBtn} disabled={isLoading} type="submit">
         {isLoading ? "Registering..." : "Register"}

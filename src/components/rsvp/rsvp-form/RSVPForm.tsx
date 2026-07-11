@@ -1,6 +1,7 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { type ChangeEvent, type FormEvent, useEffect, useState } from "react";
+import Input from "@/atomic/Input/Input";
 import type { RSVPFormData } from "@/lib/schemas";
 import { rsvpFormSchema } from "@/lib/schemas";
 import { useRSVPStore } from "@/stores/rsvpStore";
@@ -43,22 +44,19 @@ export default function RSVPForm({ editingId, onCancel }: RSVPFormProps) {
     }
   }, [editingId, getRSVP]);
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
     setErrors({});
 
     try {
       const validatedData = rsvpFormSchema.parse(formData);
-
       if (editingId) {
         updateRSVP(editingId, validatedData);
       } else {
         addRSVP(validatedData);
       }
-
       setFormData(INITIAL_FORM_DATA);
-
       if (onCancel) {
         onCancel();
       }
@@ -69,8 +67,7 @@ export default function RSVPForm({ editingId, onCancel }: RSVPFormProps) {
         };
         const newErrors: Record<string, string> = {};
         zodError.errors.forEach((err) => {
-          const field = err.path[0];
-          newErrors[field] = err.message;
+          newErrors[err.path[0]] = err.message;
         });
         setErrors(newErrors);
       }
@@ -80,10 +77,9 @@ export default function RSVPForm({ editingId, onCancel }: RSVPFormProps) {
   };
 
   const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
+    e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
   ) => {
     const { name, value, type } = e.target;
-
     if (type === "checkbox") {
       const checked = (e.target as HTMLInputElement).checked;
       setFormData((prev) => ({
@@ -92,22 +88,15 @@ export default function RSVPForm({ editingId, onCancel }: RSVPFormProps) {
         ...(name === "attending" && !checked ? { guests: 0 } : {}),
       }));
     } else if (type === "number") {
-      setFormData((prev) => ({
-        ...prev,
-        [name]: parseInt(value) || 0,
-      }));
+      setFormData((prev) => ({ ...prev, [name]: parseInt(value) || 0 }));
     } else {
-      setFormData((prev) => ({
-        ...prev,
-        [name]: value,
-      }));
+      setFormData((prev) => ({ ...prev, [name]: value }));
     }
-
     if (errors[name]) {
       setErrors((prev) => {
-        const newErrors = { ...prev };
-        delete newErrors[name];
-        return newErrors;
+        const n = { ...prev };
+        delete n[name];
+        return n;
       });
     }
   };
@@ -116,68 +105,57 @@ export default function RSVPForm({ editingId, onCancel }: RSVPFormProps) {
     <form className={styles.form} onSubmit={handleSubmit}>
       <h2>{editingId ? "Edit RSVP" : "Submit RSVP"}</h2>
 
-      <div className={styles.field}>
-        <label htmlFor="rsvp-name">Name *</label>
-        <input
-          className={`${styles.input} ${errors.name ? styles.inputError : ""}`}
-          id="rsvp-name"
-          name="name"
-          onChange={handleChange}
-          placeholder="Enter your full name"
-          type="text"
-          value={formData.name}
-        />
-        {errors.name && (
-          <span className={styles.fieldError}>{errors.name}</span>
-        )}
-      </div>
+      <Input
+        error={errors.name}
+        id="rsvp-name"
+        label="Name *"
+        name="name"
+        onChange={handleChange}
+        placeholder="Enter your full name"
+        type="text"
+        value={formData.name}
+      />
+      <Input
+        error={errors.email}
+        id="rsvp-email"
+        label="Email *"
+        name="email"
+        onChange={handleChange}
+        placeholder="your.email@example.com"
+        type="email"
+        value={formData.email}
+      />
 
-      <div className={styles.field}>
-        <label htmlFor="rsvp-email">Email *</label>
-        <input
-          className={`${styles.input} ${errors.email ? styles.inputError : ""}`}
-          id="rsvp-email"
-          name="email"
-          onChange={handleChange}
-          placeholder="your.email@example.com"
-          type="email"
-          value={formData.email}
-        />
-        {errors.email && (
-          <span className={styles.fieldError}>{errors.email}</span>
-        )}
-      </div>
+      {/*<input*/}
+      {/*  checked={formData.attending}*/}
+      {/*  id="rsvp-attending"*/}
+      {/*  name="attending"*/}
+      {/*  onChange={handleChange}*/}
+      {/*  type="checkbox"*/}
+      {/*/>*/}
+      {/*<label htmlFor="rsvp-attending">I will attend the event</label>*/}
 
-      <div className={styles.field}>
-        <div className={styles.checkbox}>
-          <input
-            checked={formData.attending}
-            id="rsvp-attending"
-            name="attending"
-            onChange={handleChange}
-            type="checkbox"
-          />
-          <label htmlFor="rsvp-attending">I will attend the event</label>
-        </div>
-      </div>
+      <Input
+        error={errors.guests}
+        id="rsvp-attending"
+        label="I will attend the event"
+        name="attending"
+        onChange={handleChange}
+        type="checkbox"
+      />
 
       {formData.attending && (
-        <div className={styles.field}>
-          <label htmlFor="rsvp-guests">Number of Additional Guests</label>
-          <input
-            className={`${styles.input} ${errors.guests ? styles.inputError : ""}`}
-            id="rsvp-guests"
-            max="10"
-            min="0"
-            name="guests"
-            onChange={handleChange}
-            type="number"
-            value={formData.guests}
-          />
-          {errors.guests && (
-            <span className={styles.fieldError}>{errors.guests}</span>
-          )}
-        </div>
+        <Input
+          error={errors.guests}
+          id="rsvp-guests"
+          label="Number of Additional Guests"
+          max="10"
+          min="0"
+          name="guests"
+          onChange={handleChange}
+          type="number"
+          value={formData.guests}
+        />
       )}
 
       <div className={styles.field}>
@@ -189,7 +167,7 @@ export default function RSVPForm({ editingId, onCancel }: RSVPFormProps) {
           id="rsvp-dietary"
           name="dietaryRestrictions"
           onChange={handleChange}
-          placeholder="Let us know about any dietary needs or special requests..."
+          placeholder="Let us know..."
           value={formData.dietaryRestrictions}
         />
         {errors.dietaryRestrictions && (

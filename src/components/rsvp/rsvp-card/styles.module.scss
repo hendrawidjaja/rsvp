@@ -37,8 +37,7 @@
   margin-top: 1rem;
 }
 
-.editBtn {
-  background: $secondary-color;
+.actionBtn {
   border: none;
   border-radius: $border-radius;
   color: white;
@@ -52,17 +51,10 @@
   }
 }
 
+.editBtn {
+  background: $secondary-color;
+}
+
 .deleteBtn {
   background: $danger-color;
-  border: none;
-  border-radius: $border-radius;
-  color: white;
-  cursor: pointer;
-  font-size: 0.875rem;
-  padding: 0.5rem 1rem;
-  transition: $transition;
-
-  &:hover {
-    opacity: 0.9;
-  }
 }

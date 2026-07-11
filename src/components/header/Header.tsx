@@ -1,6 +1,6 @@
 "use client";
 
-import Button from "@/atomic/Button";
+import Button from "@/atomic/Button/Button";
 import ThemeSelector from "@/components/theme-selector/ThemeSelector";
 import { useAuthStore } from "@/stores/authStore";
 import styles from "./styles.module.scss";

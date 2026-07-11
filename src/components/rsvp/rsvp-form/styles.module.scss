@@ -4,7 +4,6 @@
   background: $card-background;
   border-radius: $border-radius;
   box-shadow: $box-shadow;
-  margin-bottom: 2rem;
   padding: 2rem;
 
   h2 {
@@ -16,6 +15,7 @@
 
 .field {
   margin-bottom: 1.5rem;
+  position: relative;
 
   label {
     color: $text-color;
@@ -29,7 +29,6 @@
   background: white;
   border: 2px solid $border-color;
   border-radius: $border-radius;
-  color: $text-color;
   font-size: 1rem;
   padding: 0.75rem;
   transition: $transition;
@@ -50,9 +49,8 @@
   background: white;
   border: 2px solid $border-color;
   border-radius: $border-radius;
-  color: $text-color;
   font-size: 1rem;
-  min-height: 100px;
+  min-height: 120px;
   padding: 0.75rem;
   resize: vertical;
   transition: $transition;
@@ -65,22 +63,17 @@
   }
 }
 
-.checkbox {
+.container {
   align-items: center;
   display: flex;
   gap: 0.75rem;
+  position: relative;
 
   input[type="checkbox"] {
     accent-color: $primary-color;
     cursor: pointer;
     height: 1.25rem;
     width: 1.25rem;
-  }
-
-  label {
-    cursor: pointer;
-    margin-bottom: 0;
-    user-select: none;
   }
 }
 

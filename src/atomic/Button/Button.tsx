@@ -5,6 +5,7 @@ type ButtonProps = PropsWithChildren<{
   ariaLabel: string;
   className?: string;
   disabled?: boolean;
+  fullWidth?: boolean;
   onClick?: () => void;
   type?: ButtonHTMLAttributes<HTMLButtonElement>["type"];
 }>;
@@ -14,6 +15,7 @@ const Button = ({
   children,
   className,
   disabled = false,
+  fullWidth = false,
   onClick,
   type = "button",
 }: ButtonProps) => {
@@ -21,7 +23,7 @@ const Button = ({
     <button
       aria-disabled={disabled || undefined}
       aria-label={!children ? ariaLabel : undefined}
-      className={`${styles.button} ${className ?? ""}`}
+      className={`${styles.button} ${fullWidth ? styles.fullWidth : ""} ${className ?? ""}`}
       disabled={disabled}
       onClick={onClick}
       type={type}

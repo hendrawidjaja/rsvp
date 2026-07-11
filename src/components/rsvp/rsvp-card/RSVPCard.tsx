@@ -33,14 +33,14 @@ export default function RSVPCard({ rsvp, onEdit, onDelete }: RSVPCardProps) {
       </p>
       <div className={styles.actions}>
         <button
-          className={styles.editBtn}
+          className={`${styles.actionBtn} ${styles.editBtn}`}
           onClick={() => onEdit(rsvp.id)}
           type="button"
         >
           Edit
         </button>
         <button
-          className={styles.deleteBtn}
+          className={`${styles.actionBtn} ${styles.deleteBtn}`}
           onClick={() => onDelete(rsvp.id)}
           type="button"
         >

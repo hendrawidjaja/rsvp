@@ -1,0 +1,88 @@
+@use "../../styles/variables" as *;
+
+.container {
+  margin-bottom: 1.5rem;
+  position: relative;
+
+  label {
+    color: $text-color;
+    display: block;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+  }
+}
+
+.wrapper {
+  position: relative;
+
+  &:has(.clear) .input {
+    padding-right: 2.5rem;
+  }
+}
+
+.input {
+  background: white;
+  border: 2px solid $border-color;
+  border-radius: $border-radius;
+  font-size: 1rem;
+  padding: 0.75rem;
+  transition: $transition;
+  width: 100%;
+
+  &:focus {
+    border-color: $primary-color;
+    outline: none;
+  }
+
+  &.inputError {
+    border-color: $danger-color;
+  }
+}
+
+.clear {
+  background: none;
+  border: none;
+  color: $text-muted;
+  cursor: pointer;
+  font-size: 1rem;
+  height: 100%;
+  padding: 0 0.75rem;
+  position: absolute;
+  right: 0;
+  top: 0;
+
+  &:hover {
+    color: $text-color;
+  }
+}
+
+.field:has(.clear) .input {
+  padding-right: 2.5rem;
+}
+
+.error {
+  color: $danger-color;
+  display: block;
+  font-size: 0.875rem;
+  margin-top: 0.25rem;
+}
+
+.checkbox {
+  align-items: center;
+  display: flex;
+  gap: 0.75rem;
+  margin-bottom: 1.5rem;
+
+  input[type="checkbox"] {
+    accent-color: $primary-color;
+    cursor: pointer;
+    height: 1.25rem;
+    width: 1.25rem;
+  }
+
+  label {
+    cursor: pointer;
+    margin-bottom: 0;
+    user-select: none;
+  }
+}

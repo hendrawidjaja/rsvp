@@ -5,16 +5,16 @@ import { persist } from "zustand/middleware";
 import type { User } from "@/lib/schemas";
 
 interface AuthState {
-  user: User | null;
-  token: string | null;
+  error: string | null;
+  fetchUser: () => Promise<void>;
   isAuthenticated: boolean;
   isLoading: boolean;
-  error: string | null;
   login: (email: string, password: string) => Promise<void>;
-  register: (email: string, password: string, name: string) => Promise<void>;
   logout: () => void;
+  register: (email: string, password: string, name: string) => Promise<void>;
+  token: string | null;
   updateTheme: (theme: string) => Promise<void>;
-  fetchUser: () => Promise<void>;
+  user: User | null;
 }
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8080/api";
@@ -22,113 +22,7 @@ const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8080/api";
 export const useAuthStore = create<AuthState>()(
   persist(
     (set, get) => ({
-      user: null,
-      token: null,
-      isAuthenticated: false,
-      isLoading: false,
       error: null,
-
-      login: async (email: string, password: string) => {
-        set({ isLoading: true, error: null });
-        try {
-          const response = await fetch(`${API_URL}/auth/login`, {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ email, password }),
-          });
-
-          const data = await response.json();
-
-          if (!response.ok) {
-            throw new Error(data.message || "Login failed");
-          }
-
-          set({
-            user: data.data.user,
-            token: data.data.token,
-            isAuthenticated: true,
-            isLoading: false,
-          });
-        } catch (error) {
-          set({
-            error: error instanceof Error ? error.message : "Login failed",
-            isLoading: false,
-          });
-          throw error;
-        }
-      },
-
-      register: async (email: string, password: string, name: string) => {
-        set({ isLoading: true, error: null });
-        try {
-          const response = await fetch(`${API_URL}/auth/register`, {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ email, password, name }),
-          });
-
-          const data = await response.json();
-
-          if (!response.ok) {
-            throw new Error(data.message || "Registration failed");
-          }
-
-          set({
-            user: data.data.user,
-            token: data.data.token,
-            isAuthenticated: true,
-            isLoading: false,
-          });
-        } catch (error) {
-          set({
-            error: error instanceof Error ? error.message : "Registration failed",
-            isLoading: false,
-          });
-          throw error;
-        }
-      },
-
-      logout: () => {
-        set({
-          user: null,
-          token: null,
-          isAuthenticated: false,
-          error: null,
-        });
-      },
-
-      updateTheme: async (theme: string) => {
-        const { token } = get();
-        if (!token) return;
-
-        set({ isLoading: true });
-        try {
-          const response = await fetch(`${API_URL}/auth/theme`, {
-            method: "PUT",
-            headers: {
-              "Content-Type": "application/json",
-              "Authorization": `Bearer ${token}`,
-            },
-            body: JSON.stringify({ theme }),
-          });
-
-          const data = await response.json();
-
-          if (!response.ok) {
-            throw new Error(data.message || "Failed to update theme");
-          }
-
-          set((state) => ({
-            user: state.user ? { ...state.user, theme: data.data.theme } : null,
-            isLoading: false,
-          }));
-        } catch (error) {
-          set({
-            error: error instanceof Error ? error.message : "Failed to update theme",
-            isLoading: false,
-          });
-        }
-      },
 
       fetchUser: async () => {
         const { token } = get();
@@ -140,7 +34,7 @@ export const useAuthStore = create<AuthState>()(
         try {
           const response = await fetch(`${API_URL}/auth/me`, {
             headers: {
-              "Authorization": `Bearer ${token}`,
+              Authorization: `Bearer ${token}`,
             },
           });
 
@@ -151,17 +45,127 @@ export const useAuthStore = create<AuthState>()(
           }
 
           set({
-            user: data.data,
             isAuthenticated: true,
+            user: data.data,
           });
         } catch {
           set({
-            user: null,
-            token: null,
             isAuthenticated: false,
+            token: null,
+            user: null,
           });
         }
       },
+      isAuthenticated: false,
+      isLoading: false,
+
+      login: async (email: string, password: string) => {
+        set({ error: null, isLoading: true });
+        try {
+          const response = await fetch(`${API_URL}/auth/login`, {
+            body: JSON.stringify({ email, password }),
+            headers: { "Content-Type": "application/json" },
+            method: "POST",
+          });
+
+          const data = await response.json();
+
+          if (!response.ok) {
+            throw new Error(data.message || "Login failed");
+          }
+
+          set({
+            isAuthenticated: true,
+            isLoading: false,
+            token: data.data.token,
+            user: data.data.user,
+          });
+        } catch (error) {
+          set({
+            error: error instanceof Error ? error.message : "Login failed",
+            isLoading: false,
+          });
+          throw error;
+        }
+      },
+
+      logout: () => {
+        set({
+          error: null,
+          isAuthenticated: false,
+          token: null,
+          user: null,
+        });
+      },
+
+      register: async (email: string, password: string, name: string) => {
+        set({ error: null, isLoading: true });
+        try {
+          const response = await fetch(`${API_URL}/auth/register`, {
+            body: JSON.stringify({ email, name, password }),
+            headers: { "Content-Type": "application/json" },
+            method: "POST",
+          });
+
+          const data = await response.json();
+
+          if (!response.ok) {
+            throw new Error(data.message || "Registration failed");
+          }
+
+          set({
+            isAuthenticated: true,
+            isLoading: false,
+            token: data.data.token,
+            user: data.data.user,
+          });
+        } catch (error) {
+          set({
+            error:
+              error instanceof Error ? error.message : "Registration failed",
+            isLoading: false,
+          });
+          throw error;
+        }
+      },
+      token: null,
+
+      updateTheme: async (theme: string) => {
+        const { token } = get();
+        if (!token) {
+          return;
+        }
+
+        set({ isLoading: true });
+        try {
+          const response = await fetch(`${API_URL}/auth/theme`, {
+            body: JSON.stringify({ theme }),
+            headers: {
+              Authorization: `Bearer ${token}`,
+              "Content-Type": "application/json",
+            },
+            method: "PUT",
+          });
+
+          const data = await response.json();
+
+          if (!response.ok) {
+            throw new Error(data.message || "Failed to update theme");
+          }
+
+          set((state) => ({
+            isLoading: false,
+            user: state.user ? { ...state.user, theme: data.data.theme } : null,
+          }));
+        } catch (error) {
+          set({
+            error:
+              error instanceof Error ? error.message : "Failed to update theme",
+            isLoading: false,
+          });
+        }
+      },
+      user: null,
     }),
     {
       name: "auth-storage",

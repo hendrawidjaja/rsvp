@@ -1,7 +1,7 @@
 "use client";
 
 import { useRSVPStore } from "@/stores/rsvpStore";
-import styles from "./stats-display.module.scss";
+import styles from "./styles.module.scss";
 
 export default function StatsDisplay() {
   const stats = useRSVPStore((state) => state.getStats());

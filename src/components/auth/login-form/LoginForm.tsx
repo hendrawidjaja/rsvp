@@ -1,9 +1,10 @@
 "use client";
 
-import { useState } from "react";
 import Link from "next/link";
-import { useAuthStore } from "@/stores/authStore";
+import { useState } from "react";
+import Input from "@/atomic/Input/Input";
 import { loginSchema } from "@/lib/schemas";
+import { useAuthStore } from "@/stores/authStore";
 import styles from "./styles.module.scss";
 
 export default function LoginForm() {
@@ -39,31 +40,25 @@ export default function LoginForm() {
 
       {error && <div className={styles.error}>{error}</div>}
 
-      <div className={styles.field}>
-        <label htmlFor="login-email">Email</label>
-        <input
-          className={styles.input}
-          id="login-email"
-          onChange={(e) => setEmail(e.target.value)}
-          required
-          type="email"
-          value={email}
-        />
-        {errors.email && <span className={styles.fieldError}>{errors.email}</span>}
-      </div>
+      <Input
+        error={errors.email}
+        id="login-email"
+        label="Email"
+        onChange={(e) => setEmail(e.target.value)}
+        required
+        type="email"
+        value={email}
+      />
 
-      <div className={styles.field}>
-        <label htmlFor="login-password">Password</label>
-        <input
-          className={styles.input}
-          id="login-password"
-          onChange={(e) => setPassword(e.target.value)}
-          required
-          type="password"
-          value={password}
-        />
-        {errors.password && <span className={styles.fieldError}>{errors.password}</span>}
-      </div>
+      <Input
+        error={errors.password}
+        id="login-password"
+        label="Password"
+        onChange={(e) => setPassword(e.target.value)}
+        required
+        type="password"
+        value={password}
+      />
 
       <button className={styles.submitBtn} disabled={isLoading} type="submit">
         {isLoading ? "Logging in..." : "Login"}

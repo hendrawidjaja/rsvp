@@ -11,7 +11,7 @@
   background: $card-background;
   border-radius: $border-radius;
   box-shadow: $box-shadow;
-  padding: 1.5rem;
+  padding: 1.5rem 1rem;
   text-align: center;
 }
 
@@ -24,6 +24,5 @@
 .label {
   color: $text-muted;
   font-size: 0.875rem;
-  letter-spacing: 0.5px;
   text-transform: uppercase;
 }
