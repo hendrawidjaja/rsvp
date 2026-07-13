@@ -3,35 +3,51 @@
   <component name="AutoImportSettings">
     <option name="autoReloadType" value="ALL" />
   </component>
+  <component name="CargoProjects">
+    <cargoProject FILE="$PROJECT_DIR$/backend/Cargo.toml">
+      <package file="$PROJECT_DIR$/backend">
+        <feature name="default" enabled="true" />
+      </package>
+    </cargoProject>
+  </component>
   <component name="ChangeListManager">
-    <list default="true" id="44d81e7d-5ab9-4975-9852-8a66c0da2d14" name="Changes" comment="- unified scsss naming&#10;- added several auth process">
-      <change afterPath="$PROJECT_DIR$/src/atomic/Button/Button.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/atomic/Input/Input.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/atomic/Input/styles.module.scss" afterDir="false" />
+    <list default="true" id="44d81e7d-5ab9-4975-9852-8a66c0da2d14" name="Changes" comment="- added forgot password, reset password&#10;- fixed styling">
+      <change afterPath="$PROJECT_DIR$/src/styles/partial/_flex.scss" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/atomic/Button.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/atomic/styles.module.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/atomic/Button/styles.module.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/auth.rs" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/auth.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/db.rs" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/db.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/handlers.rs" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/handlers.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/models.rs" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/models.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/layout.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/layout.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/atomic/Button/Button.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/atomic/Button/Button.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/atomic/Input/Input.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/atomic/Input/Input.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/atomic/Input/styles.module.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/atomic/Input/styles.module.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/auth/auth-page/AuthPage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/auth/auth-page/AuthPage.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/auth/login-form/LoginForm.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/auth/login-form/LoginForm.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/auth/register-form/RegisterForm.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/auth/register-form/RegisterForm.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/auth/register-form/styles.module.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/auth/register-form/styles.module.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/client-layout/styles.module.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/client-layout/styles.module.scss" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/header/Header.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/header/Header.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/rsvp/rsvp-card/RSVPCard.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/rsvp/rsvp-card/RSVPCard.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/rsvp/rsvp-card/styles.module.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/rsvp/rsvp-card/styles.module.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/header/styles.module.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/header/styles.module.scss" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/rsvp/rsvp-form/RSVPForm.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/rsvp/rsvp-form/RSVPForm.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/rsvp/rsvp-form/styles.module.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/rsvp/rsvp-form/styles.module.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/stats-display/StatsDisplay.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/stats-display/StatsDisplay.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/stats-display/stats-display.module.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/stats-display/styles.module.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/theme-selector/ThemeSelector.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/theme-selector/ThemeSelector.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/stores/authStore.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/stores/authStore.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/styles/globals.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/styles/globals.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/start.sh" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="FormatOnSaveOptions">
+    <option name="myAllFileTypesSelected" value="false" />
+    <option name="mySelectedFileTypes">
+      <set>
+        <option value="Rust" />
+      </set>
+    </option>
+  </component>
   <component name="Git.Settings">
+    <option name="PUSH_AUTO_UPDATE" value="true" />
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="GitHubPullRequestSearchHistory">{
@@ -62,29 +78,32 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.typescript.service.memoryLimit.init&quot;: &quot;true&quot;,
-    &quot;code.cleanup.on.save&quot;: &quot;true&quot;,
-    &quot;codeWithMe.voiceChat.enabledByDefault&quot;: &quot;false&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;js.debugger.nextJs.config.created.client&quot;: &quot;true&quot;,
-    &quot;js.debugger.nextJs.config.created.server&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/Users/hendrawidjaja/Development/rsvp&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.standard&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.standard&quot;: &quot;&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;org.rust.first.attach.projects&quot;: &quot;true&quot;,
-    &quot;rearrange.code.on.save&quot;: &quot;true&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;org.jetbrains.plugins.github.ui.GithubSettingsConfigurable&quot;,
-    &quot;ts.external.directory.path&quot;: &quot;/Users/hendrawidjaja/Development/rsvp/node_modules/typescript/lib&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "RunOnceActivity.typescript.service.memoryLimit.init": "true",
+    "SHELLCHECK.PATH": "I do mind",
+    "code.cleanup.on.save": "true",
+    "codeWithMe.voiceChat.enabledByDefault": "false",
+    "git-widget-placeholder": "main",
+    "js.debugger.nextJs.config.created.client": "true",
+    "js.debugger.nextJs.config.created.server": "true",
+    "last_opened_file_path": "/Users/hendrawidjaja/Development/rsvp",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.standard": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.standard": "",
+    "nodejs_package_manager_path": "npm",
+    "org.rust.cargo.project.model.PROJECT_DISCOVERY": "true",
+    "org.rust.cargo.project.model.impl.CargoExternalSystemProjectAware.subscribe.first.balloon": "",
+    "org.rust.first.attach.projects": "true",
+    "rearrange.code.on.save": "true",
+    "settings.editor.selected.configurable": "actions.on.save",
+    "ts.external.directory.path": "/Users/hendrawidjaja/Development/rsvp/node_modules/typescript/lib"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/src/atomic/Button" />
@@ -117,7 +136,7 @@
       <updated>1783577695320</updated>
       <workItem from="1783577696509" duration="17428000" />
       <workItem from="1783717763796" duration="252000" />
-      <workItem from="1783718034401" duration="5542000" />
+      <workItem from="1783718034401" duration="19480000" />
     </task>
     <task id="LOCAL-00001" summary="added new changes">
       <option name="closed" value="true" />
@@ -159,7 +178,15 @@
       <option name="project" value="LOCAL" />
       <updated>1783717728508</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="- added forgot password, reset password&#10;- fixed styling">
+      <option name="closed" value="true" />
+      <created>1783803454867</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1783803454867</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -174,7 +201,8 @@
     <MESSAGE value="added several page.&#10;enhanced button" />
     <MESSAGE value="enhanced button" />
     <MESSAGE value="- unified scsss naming&#10;- added several auth process" />
-    <option name="LAST_COMMIT_MESSAGE" value="- unified scsss naming&#10;- added several auth process" />
+    <MESSAGE value="- added forgot password, reset password&#10;- fixed styling" />
+    <option name="LAST_COMMIT_MESSAGE" value="- added forgot password, reset password&#10;- fixed styling" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

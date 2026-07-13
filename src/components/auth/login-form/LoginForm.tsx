@@ -1,7 +1,8 @@
 "use client";
 
 import Link from "next/link";
-import { useState } from "react";
+import { type ChangeEvent, useEffect, useState } from "react";
+import Button from "@/atomic/Button/Button";
 import Input from "@/atomic/Input/Input";
 import { loginSchema } from "@/lib/schemas";
 import { useAuthStore } from "@/stores/authStore";
@@ -12,6 +13,17 @@ export default function LoginForm() {
   const [password, setPassword] = useState("");
   const [errors, setErrors] = useState<Record<string, string>>({});
   const { login, isLoading, error } = useAuthStore();
+
+  const isSubmitDisabled = !email || !password || isLoading;
+
+  const handleChange =
+    (setter: (v: string) => void) => (e: ChangeEvent<HTMLInputElement>) => {
+      setter(e.target.value);
+      useAuthStore.setState({ error: null });
+      if (errors.email || errors.password) {
+        setErrors({});
+      }
+    };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -30,39 +42,50 @@ export default function LoginForm() {
     try {
       await login(email, password);
     } catch {
-      // Error handled by store
+      // handled by store
     }
   };
 
+  useEffect(() => {
+    useAuthStore.setState({ error: null });
+  }, []);
+
   return (
-    <form className={styles.form} onSubmit={handleSubmit}>
+    <form className={styles.form} noValidate onSubmit={handleSubmit}>
       <h2>Login</h2>
 
-      {error && <div className={styles.error}>{error}</div>}
+      {error && <div className={styles.alert}>{error}</div>}
 
       <Input
+        autoComplete="email"
         error={errors.email}
         id="login-email"
         label="Email"
-        onChange={(e) => setEmail(e.target.value)}
+        onChange={handleChange(setEmail)}
         required
         type="email"
         value={email}
       />
 
       <Input
+        autoComplete="current-password"
         error={errors.password}
         id="login-password"
         label="Password"
-        onChange={(e) => setPassword(e.target.value)}
+        onChange={handleChange(setPassword)}
         required
         type="password"
         value={password}
       />
 
-      <button className={styles.submitBtn} disabled={isLoading} type="submit">
+      <Button
+        ariaLabel="Login"
+        disabled={isSubmitDisabled}
+        fullWidth
+        type="submit"
+      >
         {isLoading ? "Logging in..." : "Login"}
-      </button>
+      </Button>
 
       <p className={styles.forgotLink}>
         <Link href="/forgot-password">Forgot password?</Link>

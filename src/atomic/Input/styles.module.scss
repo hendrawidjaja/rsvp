@@ -1,9 +1,7 @@
 @use "../../styles/variables" as *;
+@use "../../styles/partial/flex" as *;
 
 .container {
-  margin-bottom: 1.5rem;
-  position: relative;
-
   label {
     color: $text-color;
     display: block;
@@ -14,10 +12,6 @@
 
 .wrapper {
   position: relative;
-
-  &:has(.clear) .input {
-    padding-right: 2.5rem;
-  }
 }
 
 .input {
@@ -31,7 +25,6 @@
 
   &:focus {
     border-color: $primary-color;
-    outline: none;
   }
 
   &.inputError {
@@ -39,25 +32,36 @@
   }
 }
 
-.clear {
-  background: none;
-  border: none;
-  color: $text-muted;
-  cursor: pointer;
-  font-size: 1rem;
+.actions {
+  @include flex($align: center);
+  gap: 0.25rem;
   height: 100%;
-  padding: 0 0.75rem;
+  padding-right: 0.5rem;
   position: absolute;
   right: 0;
   top: 0;
+}
+
+.toggle,
+.clear {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 1rem;
+  padding: 0.25rem;
+}
+
+.clear {
+  @include flex($align: center, $justify: center);
+  color: $text-muted;
 
   &:hover {
     color: $text-color;
   }
 }
 
-.field:has(.clear) .input {
-  padding-right: 2.5rem;
+.wrapper:has(.actions) .input {
+  padding-right: 5rem;
 }
 
 .error {
@@ -68,10 +72,8 @@
 }
 
 .checkbox {
-  align-items: center;
-  display: flex;
+  @include flex($align: center);
   gap: 0.75rem;
-  margin-bottom: 1.5rem;
 
   input[type="checkbox"] {
     accent-color: $primary-color;

@@ -4,8 +4,8 @@ import "@/styles/globals.scss";
 import type { ReactNode } from "react";
 
 export const metadata: Metadata = {
-  description: "Event RSVP Management Application",
-  title: "RSVP App",
+  description: "Event RSVP",
+  title: "RSVP",
 };
 
 export default function RootLayout({ children }: { children: ReactNode }) {

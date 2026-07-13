@@ -12,6 +12,19 @@ pub struct User {
     pub password_hash: String,
     pub name: String,
     pub theme: String,
+    pub phone: Option<String>,
+    pub slug: Option<String>,
+    pub tenant_type: Option<String>,
+    pub is_tenant: bool,
+    pub registered_at: DateTime<Utc>,
+    pub last_login_at: Option<DateTime<Utc>>,
+    pub latitude: Option<f64>,
+    pub longitude: Option<f64>,
+    pub browser: Option<String>,
+    pub device: Option<String>,
+    pub is_premium: bool,
+    pub flag: String,
+    pub report_count: i32,
     pub reset_token: Option<String>,
     pub reset_token_expires_at: Option<DateTime<Utc>>,
     pub created_at: DateTime<Utc>,
@@ -20,12 +33,14 @@ pub struct User {
 
 #[derive(Debug, Deserialize, Validate)]
 pub struct CreateUserRequest {
-    #[validate(email(message = "Invalid email address"))]
+    #[validate(email)]
     pub email: String,
-    #[validate(length(min = 8, message = "Password must be at least 8 characters"))]
+    #[validate(length(min = 8))]
     pub password: String,
-    #[validate(length(min = 1, message = "Name is required"))]
+    #[validate(length(min = 1))]
     pub name: String,
+    pub phone: Option<String>,
+    pub tenant_type: Option<String>,
 }
 
 #[derive(Debug, Deserialize)]
@@ -36,14 +51,14 @@ pub struct LoginRequest {
 
 #[derive(Debug, Deserialize, Validate)]
 pub struct ForgotPasswordRequest {
-    #[validate(email(message = "Invalid email address"))]
+    #[validate(email)]
     pub email: String,
 }
 
 #[derive(Debug, Deserialize, Validate)]
 pub struct ResetPasswordRequest {
     pub token: String,
-    #[validate(length(min = 8, message = "Password must be at least 8 characters"))]
+    #[validate(length(min = 8))]
     pub password: String,
 }
 
@@ -58,32 +73,22 @@ pub struct UserResponse {
     pub id: Uuid,
     pub email: String,
     pub name: String,
+    pub phone: Option<String>,
+    pub tenant_type: Option<String>,
+    pub is_tenant: bool,
+    pub is_premium: bool,
+    pub flag: String,
     pub theme: String,
 }
 
 impl From<User> for UserResponse {
-    fn from(user: User) -> Self {
-        Self {
-            id: user.id,
-            email: user.email,
-            name: user.name,
-            theme: user.theme,
-        }
+    fn from(u: User) -> Self {
+        Self { id: u.id, email: u.email, name: u.name, phone: u.phone, tenant_type: u.tenant_type, is_tenant: u.is_tenant, is_premium: u.is_premium, flag: u.flag, theme: u.theme }
     }
 }
 
-#[derive(Debug, Deserialize, Validate)]
-pub struct UpdateThemeRequest {
-    #[validate(length(min = 1, message = "Theme is required"))]
-    pub theme: String,
-}
-
 #[derive(Debug, Serialize, Deserialize)]
-pub struct Claims {
-    pub sub: String,
-    pub exp: usize,
-    pub iat: usize,
-}
+pub struct Claims { pub sub: String, pub exp: usize, pub iat: usize }
 
 #[derive(Debug, Serialize)]
 pub struct ApiResponse<T: Serialize> {
@@ -93,19 +98,11 @@ pub struct ApiResponse<T: Serialize> {
 }
 
 impl<T: Serialize> ApiResponse<T> {
-    pub fn success(data: T) -> Self {
-        Self {
-            success: true,
-            data: Some(data),
-            message: None,
-        }
-    }
+    pub fn success(data: T) -> Self { Self { success: true, data: Some(data), message: None } }
+}
 
-    pub fn error(message: &str) -> Self {
-        Self {
-            success: false,
-            data: None,
-            message: Some(message.to_string()),
-        }
-    }
+#[derive(Debug, Deserialize, Validate)]
+pub struct UpdateThemeRequest {
+    #[validate(length(min = 1))]
+    pub theme: String,
 }

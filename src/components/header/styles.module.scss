@@ -1,17 +1,15 @@
 @use "../../styles/variables" as *;
+@use "../../styles/partial/flex" as *;
 
 .header {
   background: $primary-color;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
   color: white;
-  padding: 1.5rem 0;
+  padding: 1.5rem 1.25rem;
 }
 
-.headerContent {
-  align-items: center;
-  display: flex;
-  justify-content: space-between;
-  padding: 0 20px;
+.container {
+  @include flex($align: center, $justify: space-between);
 }
 
 .title {
@@ -20,14 +18,11 @@
 }
 
 .actions {
-  align-items: center;
-  display: flex;
-  gap: 1rem;
+  @include flex($align: center, $gap: 1rem);
 }
 
 .userMenu {
-  align-items: center;
-  display: flex;
+  @include flex($align: center, $gap: 1rem);
   gap: 1rem;
 }
 

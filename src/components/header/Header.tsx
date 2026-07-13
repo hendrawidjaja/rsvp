@@ -10,8 +10,9 @@ export default function Header() {
 
   return (
     <header className={styles.header}>
-      <div className={styles.headerContent}>
-        <h1 className={styles.title}>RSVP Manager</h1>
+      <div className={styles.container}>
+        <h1 className={styles.title}>RSVP</h1>
+
         <div className={styles.actions}>
           <ThemeSelector />
           {isAuthenticated ? (

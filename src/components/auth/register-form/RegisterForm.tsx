@@ -1,6 +1,8 @@
+// src/components/auth/register-form/RegisterForm.tsx
 "use client";
 
 import { useState } from "react";
+import Button from "@/atomic/Button/Button";
 import Input from "@/atomic/Input/Input";
 import { registerSchema } from "@/lib/schemas";
 import { useAuthStore } from "@/stores/authStore";
@@ -12,6 +14,8 @@ export default function RegisterForm() {
   const [password, setPassword] = useState("");
   const [errors, setErrors] = useState<Record<string, string>>({});
   const { register, isLoading, error } = useAuthStore();
+
+  const isSubmitDisabled = !name || !email || !password || isLoading;
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -35,45 +39,53 @@ export default function RegisterForm() {
   };
 
   return (
-    <form className={styles.form} onSubmit={handleSubmit}>
+    <form className={styles.form} noValidate onSubmit={handleSubmit}>
       <h2>Register</h2>
 
       {error && <div className={styles.error}>{error}</div>}
 
       <Input
+        autoComplete="name"
+        error={errors.name}
         id="register-name"
         label="Name"
+        onChange={(e) => setName(e.target.value)}
+        required
         type="text"
         value={name}
-        onChange={(e) => setName(e.target.value)}
-        error={errors.name}
-        required
       />
 
       <Input
+        autoComplete="email"
+        error={errors.email}
         id="register-email"
         label="Email"
+        onChange={(e) => setEmail(e.target.value)}
+        required
         type="email"
         value={email}
-        onChange={(e) => setEmail(e.target.value)}
-        error={errors.email}
-        required
       />
 
       <Input
+        autoComplete="new-password"
+        error={errors.password}
         id="register-password"
         label="Password"
+        minLength={8}
+        onChange={(e) => setPassword(e.target.value)}
+        required
         type="password"
         value={password}
-        onChange={(e) => setPassword(e.target.value)}
-        error={errors.password}
-        required
-        minLength={8}
       />
 
-      <button className={styles.submitBtn} disabled={isLoading} type="submit">
+      <Button
+        ariaLabel="Register"
+        disabled={isSubmitDisabled}
+        fullWidth
+        type="submit"
+      >
         {isLoading ? "Registering..." : "Register"}
-      </button>
+      </Button>
     </form>
   );
 }

@@ -2,7 +2,16 @@
 
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
-import type { User } from "@/lib/schemas";
+
+interface User {
+  email: string;
+  id: string;
+  isTenant: boolean;
+  name: string;
+  phone?: string;
+  tenantType?: string;
+  theme: string;
+}
 
 interface AuthState {
   error: string | null;
@@ -11,7 +20,13 @@ interface AuthState {
   isLoading: boolean;
   login: (email: string, password: string) => Promise<void>;
   logout: () => void;
-  register: (email: string, password: string, name: string) => Promise<void>;
+  register: (
+    email: string,
+    password: string,
+    name: string,
+    phone?: string,
+    tenantType?: string,
+  ) => Promise<void>;
   token: string | null;
   updateTheme: (theme: string) => Promise<void>;
   user: User | null;
@@ -27,148 +42,101 @@ export const useAuthStore = create<AuthState>()(
       fetchUser: async () => {
         const { token } = get();
         if (!token) {
-          set({ isAuthenticated: false });
           return;
         }
-
         try {
-          const response = await fetch(`${API_URL}/auth/me`, {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
+          const res = await fetch(`${API_URL}/auth/me`, {
+            headers: { Authorization: `Bearer ${token}` },
           });
-
-          const data = await response.json();
-
-          if (!response.ok) {
-            throw new Error(data.message || "Failed to fetch user");
+          const data = await res.json();
+          if (res.ok) {
+            set({ isAuthenticated: true, user: data.data });
           }
-
-          set({
-            isAuthenticated: true,
-            user: data.data,
-          });
         } catch {
-          set({
-            isAuthenticated: false,
-            token: null,
-            user: null,
-          });
+          set({ isAuthenticated: false, token: null, user: null });
         }
       },
       isAuthenticated: false,
       isLoading: false,
 
-      login: async (email: string, password: string) => {
+      login: async (email, password) => {
         set({ error: null, isLoading: true });
         try {
-          const response = await fetch(`${API_URL}/auth/login`, {
+          const res = await fetch(`${API_URL}/auth/login`, {
             body: JSON.stringify({ email, password }),
             headers: { "Content-Type": "application/json" },
             method: "POST",
           });
-
-          const data = await response.json();
-
-          if (!response.ok) {
-            throw new Error(data.message || "Login failed");
+          const data = await res.json();
+          if (!res.ok) {
+            throw new Error(data.message);
           }
-
           set({
             isAuthenticated: true,
             isLoading: false,
             token: data.data.token,
             user: data.data.user,
           });
-        } catch (error) {
+        } catch (err) {
           set({
-            error: error instanceof Error ? error.message : "Login failed",
+            error: err instanceof Error ? err.message : "Login failed",
             isLoading: false,
           });
-          throw error;
         }
       },
 
-      logout: () => {
-        set({
-          error: null,
-          isAuthenticated: false,
-          token: null,
-          user: null,
-        });
-      },
+      logout: () => set({ isAuthenticated: false, token: null, user: null }),
 
-      register: async (email: string, password: string, name: string) => {
+      register: async (email, password, name, phone?, tenantType?) => {
         set({ error: null, isLoading: true });
         try {
-          const response = await fetch(`${API_URL}/auth/register`, {
-            body: JSON.stringify({ email, name, password }),
+          const res = await fetch(`${API_URL}/auth/register`, {
+            body: JSON.stringify({
+              email,
+              name,
+              password,
+              phone,
+              tenant_type: tenantType || null,
+            }),
             headers: { "Content-Type": "application/json" },
             method: "POST",
           });
-
-          const data = await response.json();
-
-          if (!response.ok) {
-            throw new Error(data.message || "Registration failed");
+          const data = await res.json();
+          if (!res.ok) {
+            throw new Error(data.message);
           }
-
           set({
             isAuthenticated: true,
             isLoading: false,
             token: data.data.token,
             user: data.data.user,
           });
-        } catch (error) {
+        } catch (err) {
           set({
-            error:
-              error instanceof Error ? error.message : "Registration failed",
+            error: err instanceof Error ? err.message : "Registration failed",
             isLoading: false,
           });
-          throw error;
         }
       },
       token: null,
 
-      updateTheme: async (theme: string) => {
+      updateTheme: async (theme) => {
         const { token } = get();
         if (!token) {
           return;
         }
-
-        set({ isLoading: true });
-        try {
-          const response = await fetch(`${API_URL}/auth/theme`, {
-            body: JSON.stringify({ theme }),
-            headers: {
-              Authorization: `Bearer ${token}`,
-              "Content-Type": "application/json",
-            },
-            method: "PUT",
-          });
-
-          const data = await response.json();
-
-          if (!response.ok) {
-            throw new Error(data.message || "Failed to update theme");
-          }
-
-          set((state) => ({
-            isLoading: false,
-            user: state.user ? { ...state.user, theme: data.data.theme } : null,
-          }));
-        } catch (error) {
-          set({
-            error:
-              error instanceof Error ? error.message : "Failed to update theme",
-            isLoading: false,
-          });
-        }
+        await fetch(`${API_URL}/auth/theme`, {
+          body: JSON.stringify({ theme }),
+          headers: {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json",
+          },
+          method: "PUT",
+        });
+        set((s) => ({ user: s.user ? { ...s.user, theme } : null }));
       },
       user: null,
     }),
-    {
-      name: "auth-storage",
-    },
+    { name: "auth-storage" },
   ),
 );

@@ -35,4 +35,22 @@ body {
 button {
   border: none;
   cursor: pointer;
+  outline: none;
+}
+
+textarea {
+  font-size: 1rem;
+  min-height: 120px;
+  outline: none;
+  resize: vertical;
+  width: 100%;
+}
+
+input,
+select {
+  outline: none;
+}
+
+a {
+  text-decoration: none;
 }

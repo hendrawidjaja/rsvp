@@ -1,0 +1,20 @@
+@mixin flex($align: null, $justify: null, $gap: null, $direction: null) {
+  position: relative;
+  display: flex;
+
+  @if $direction == "column" {
+    flex-direction: column;
+  }
+
+  @if $align {
+    align-items: $align;
+  }
+
+  @if $justify {
+    justify-content: $justify;
+  }
+
+  @if $gap {
+    gap: $gap;
+  }
+}

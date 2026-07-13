@@ -115,6 +115,7 @@ export default function RSVPForm({ editingId, onCancel }: RSVPFormProps) {
         type="text"
         value={formData.name}
       />
+
       <Input
         error={errors.email}
         id="rsvp-email"
@@ -125,15 +126,6 @@ export default function RSVPForm({ editingId, onCancel }: RSVPFormProps) {
         type="email"
         value={formData.email}
       />
-
-      {/*<input*/}
-      {/*  checked={formData.attending}*/}
-      {/*  id="rsvp-attending"*/}
-      {/*  name="attending"*/}
-      {/*  onChange={handleChange}*/}
-      {/*  type="checkbox"*/}
-      {/*/>*/}
-      {/*<label htmlFor="rsvp-attending">I will attend the event</label>*/}
 
       <Input
         error={errors.guests}
