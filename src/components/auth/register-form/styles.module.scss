@@ -1,9 +1,10 @@
 @use "../../../styles/variables" as *;
+@use "../../../styles/partial/form" as *;
+@use "../../../styles/partial/flex" as *;
 
 .form {
-  display: flex;
-  flex-direction: column;
-  gap: 1.5rem;
+  @include form-base;
+  @include flex($direction: column, $gap: 1.5rem);
 
   h2 {
     color: $primary-color;

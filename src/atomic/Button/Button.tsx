@@ -23,7 +23,8 @@ const Button = ({
 }: ButtonProps) => {
   const buttonClass = [styles.button, fullWidth && styles.fullWidth, className]
     .filter(Boolean)
-    .join(" ");
+    .join(" ")
+    .trim();
 
   return (
     <button

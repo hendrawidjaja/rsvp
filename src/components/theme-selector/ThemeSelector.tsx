@@ -1,5 +1,6 @@
 "use client";
 
+import { useEffect, useState } from "react";
 import Button from "@/atomic/Button/Button";
 import { useAuthStore } from "@/stores/authStore";
 import { type Theme, useThemeStore } from "@/stores/themeStore";
@@ -19,6 +20,11 @@ export default function ThemeSelector({
 }: ThemeSelectorProps) {
   const { theme, setTheme } = useThemeStore();
   const { isAuthenticated, updateTheme } = useAuthStore();
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   const select = async (next: Theme) => {
     setTheme(next);
@@ -30,6 +36,10 @@ export default function ThemeSelector({
       }
     }
   };
+
+  if (!mounted) {
+    return null;
+  }
 
   const selectorClass = [styles.selector, variant === "icon" && styles.iconOnly]
     .filter(Boolean)

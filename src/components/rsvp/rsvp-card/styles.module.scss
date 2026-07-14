@@ -1,4 +1,5 @@
 @use "../../../styles/variables" as *;
+@use "../../../styles/partial/flex" as *;
 
 .card {
   background: $card-background;
@@ -17,9 +18,18 @@
   }
 }
 
-.name { color: $text-color; margin-bottom: 0.5rem; }
-.detail { color: $text-muted; margin-bottom: 0.5rem; }
-.status { font-weight: 600; }
+.name {
+  color: $text-color;
+  margin-bottom: 0.5rem;
+}
+
+.detail {
+  color: $text-muted;
+  margin-bottom: 0.5rem;
+}
+
+.status {
+  font-weight: 600; }
 
 .actions {
   @include flex($gap: 0.5rem);

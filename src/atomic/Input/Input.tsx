@@ -68,7 +68,7 @@ const Input = ({
 
   return (
     <div className={containerClass}>
-      <label htmlFor={id}>{label}</label>
+      {label ? <label htmlFor={id}>{label}</label> : null}
       <div className={styles.wrapper}>
         <input
           className={inputClass}
@@ -78,6 +78,7 @@ const Input = ({
           value={internalValue}
           {...props}
         />
+
         <div className={styles.actions}>
           {isPassword && String(internalValue).length > 0 && (
             <button

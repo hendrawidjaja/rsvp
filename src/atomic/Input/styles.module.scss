@@ -2,11 +2,12 @@
 @use "../../styles/partial/flex" as *;
 
 .container {
+  @include flex($direction: column, $gap: 0.5rem);
+
   label {
     color: $text-color;
     display: block;
     font-weight: 600;
-    margin-bottom: 0.5rem;
   }
 }
 
@@ -19,6 +20,7 @@
   border: 2px solid $border-color;
   border-radius: $border-radius;
   font-size: 1rem;
+  min-height: 48px;
   padding: 0.75rem;
   transition: $transition;
   width: 100%;
