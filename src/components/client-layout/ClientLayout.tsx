@@ -21,6 +21,18 @@ export default function ClientLayout({ children }: { children: ReactNode }) {
     fetchUser();
   }, [fetchUser, applyTheme]);
 
+  useEffect(() => {
+    const mediaQuery = window.matchMedia("(prefers-color-scheme: dark)");
+    const handleChange = (e: MediaQueryListEvent) => {
+      const savedTheme = localStorage.getItem("app-theme");
+      if (!savedTheme) {
+        useThemeStore.getState().setTheme(e.matches ? "dark" : "light");
+      }
+    };
+    mediaQuery.addEventListener("change", handleChange);
+    return () => mediaQuery.removeEventListener("change", handleChange);
+  }, []);
+
   return (
     <>
       <Header />

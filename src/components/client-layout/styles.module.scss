@@ -1,5 +1,7 @@
+@use "../../styles/partial/flex" as *;
+
 .main {
   height: 100vh;
   position: relative;
-  //padding: 2rem 0;
+  @include flex($align: center, $justify: center);
 }

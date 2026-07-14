@@ -17,44 +17,23 @@
   }
 }
 
-.name {
-  color: $text-color;
-  margin-bottom: 0.5rem;
-}
-
-.detail {
-  color: $text-muted;
-  margin-bottom: 0.5rem;
-}
-
-.status {
-  font-weight: 600;
-}
+.name { color: $text-color; margin-bottom: 0.5rem; }
+.detail { color: $text-muted; margin-bottom: 0.5rem; }
+.status { font-weight: 600; }
 
 .actions {
-  display: flex;
-  gap: 0.5rem;
+  @include flex($gap: 0.5rem);
   margin-top: 1rem;
-}
-
-.actionBtn {
-  border: none;
-  border-radius: $border-radius;
-  color: white;
-  cursor: pointer;
-  font-size: 0.875rem;
-  padding: 0.5rem 1rem;
-  transition: $transition;
-
-  &:hover {
-    opacity: 0.9;
-  }
 }
 
 .editBtn {
   background: $secondary-color;
+  font-size: 0.875rem;
+  padding: 0.5rem 1rem;
 }
 
 .deleteBtn {
   background: $danger-color;
+  font-size: 0.875rem;
+  padding: 0.5rem 1rem;
 }

@@ -24,11 +24,16 @@
 }
 
 .textarea {
-  background: white;
+  background: var(--card-background);
   border: 2px solid $border-color;
   border-radius: $border-radius;
+  color: $text-color;
+  font-size: 1rem;
+  min-height: 120px;
   padding: 0.75rem;
+  resize: vertical;
   transition: $transition;
+  width: 100%;
 
   &:focus {
     border-color: $primary-color;
@@ -36,42 +41,15 @@
   }
 }
 
-.inputError {
-  border-color: $danger-color;
-}
-
 .fieldError {
   color: $danger-color;
+  display: block;
   font-size: 0.875rem;
   margin-top: 0.25rem;
 }
 
 .actions {
   @include flex($gap: 1rem);
-}
-
-.submitBtn,
-.cancelBtn {
-  border-radius: $border-radius;
-  color: white;
-  font-size: 1rem;
-  font-weight: 600;
-  padding: 0.75rem 1.5rem;
-  position: relative;
-  transition: $transition;
-
-  &:disabled {
-    cursor: not-allowed;
-    opacity: 0.6;
-  }
-}
-
-.submitBtn {
-  background: $primary-color;
-
-  &:hover:not(:disabled) {
-    background: $primary-hover;
-  }
 }
 
 .cancelBtn {

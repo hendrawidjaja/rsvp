@@ -10,7 +10,13 @@ const themes = [
   { icon: "🌙", label: "Dark theme", value: "dark" },
 ] as const;
 
-export default function ThemeSelector() {
+type ThemeSelectorProps = {
+  variant?: "icon" | "full";
+};
+
+export default function ThemeSelector({
+  variant = "full",
+}: ThemeSelectorProps) {
   const { theme, setTheme } = useThemeStore();
   const { isAuthenticated, updateTheme } = useAuthStore();
 
@@ -25,8 +31,12 @@ export default function ThemeSelector() {
     }
   };
 
+  const selectorClass = [styles.selector, variant === "icon" && styles.iconOnly]
+    .filter(Boolean)
+    .join(" ");
+
   return (
-    <div className={styles.selector}>
+    <div className={selectorClass}>
       {themes.map(({ value, icon, label }) => (
         <Button
           ariaLabel={label}
@@ -35,7 +45,7 @@ export default function ThemeSelector() {
           onClick={() => select(value)}
           type="button"
         >
-          {icon}
+          {variant === "icon" ? icon : label}
         </Button>
       ))}
     </div>

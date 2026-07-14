@@ -53,6 +53,9 @@
     "rules": {
       "a11y": {
         "noRedundantAlt": "error",
+        "useAltText": "error",
+        "useAnchorContent": "error",
+        "useAriaPropsForRole": "error",
         "useButtonType": "error"
       },
       "complexity": {
@@ -60,10 +63,12 @@
       },
       "correctness": {
         "noUnknownProperty": "error",
+        "noUnknownUnit": "error",
         "noUnusedImports": "error",
         "noUnusedVariables": "error"
       },
       "nursery": {
+        "noDuplicateSelectors": "error",
         "noUnusedClasses": "error"
       },
       "preset": "recommended",
@@ -72,7 +77,8 @@
         "useBlockStatements": "error"
       },
       "suspicious": {
-        "noEmptyBlock": "error"
+        "noEmptyBlock": "error",
+        "noEmptySource": "error"
       }
     }
   },

@@ -12,6 +12,16 @@
   --text-muted: #6c757d;
 }
 
+[data-theme="dark"] {
+  --card-background: #16213e;
+  --background-color: #1a1a2e;
+  --border-color: #2a2a4a;
+  --primary-color: #3b82f6;
+  --text-color: #e0e0e0;
+  --primary-hover: #60a5fa;
+  --text-muted: #a0a0a0;
+}
+
 * {
   box-sizing: border-box;
   margin: 0;

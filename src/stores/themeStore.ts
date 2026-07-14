@@ -1,3 +1,4 @@
+// src/stores/themeStore.ts
 "use client";
 
 import { create } from "zustand";
@@ -9,6 +10,13 @@ interface ThemeState {
   setTheme: (theme: Theme) => void;
   theme: Theme;
 }
+
+const getSystemTheme = (): Theme => {
+  if (typeof window === "undefined") return "light";
+  return window.matchMedia("(prefers-color-scheme: dark)").matches
+    ? "dark"
+    : "light";
+};
 
 const themes: Record<Theme, Record<string, string>> = {
   dark: {
@@ -41,11 +49,12 @@ export const useThemeStore = create<ThemeState>((set, get) => ({
       root.style.setProperty(key, value);
     });
 
+    root.setAttribute("data-theme", theme);
     localStorage.setItem("app-theme", theme);
   },
   setTheme: (theme: Theme) => {
     set({ theme });
     get().applyTheme();
   },
-  theme: "light",
+  theme: getSystemTheme(),
 }));
