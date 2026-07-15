@@ -2,6 +2,7 @@
 
 import { type ReactNode, useEffect } from "react";
 import Header from "@/components/header/Header";
+import ThemeSelector from "@/components/theme-selector/ThemeSelector";
 import { useAuthStore } from "@/stores/authStore";
 import { useThemeStore } from "@/stores/themeStore";
 import styles from "./styles.module.scss";
@@ -37,6 +38,9 @@ export default function ClientLayout({ children }: { children: ReactNode }) {
     <>
       <Header />
       <main className={styles.main}>{children}</main>
+      <div className={styles.themeWrapper}>
+        <ThemeSelector variant="icon" />
+      </div>
     </>
   );
 }

@@ -11,20 +11,20 @@
     </cargoProject>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="44d81e7d-5ab9-4975-9852-8a66c0da2d14" name="Changes" comment="- refactored to use Button, Input component&#10;- removed redundant css">
-      <change afterPath="$PROJECT_DIR$/get-all.sh" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/atomic/Select/Select.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/atomic/Select/styles.module.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/styles/partial/_form.scss" afterDir="false" />
+    <list default="true" id="44d81e7d-5ab9-4975-9852-8a66c0da2d14" name="Changes" comment="- added form-base&#10;- splitted view of register account">
+      <change afterPath="$PROJECT_DIR$/user.sh" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/atomic/Button/Button.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/atomic/Button/Button.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/atomic/Input/Input.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/atomic/Input/Input.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/atomic/Input/styles.module.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/atomic/Input/styles.module.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/auth/auth-page/AuthPage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/auth/auth-page/AuthPage.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/auth/register-form/styles.module.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/auth/register-form/styles.module.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/rsvp/rsvp-card/styles.module.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/rsvp/rsvp-card/styles.module.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/theme-selector/ThemeSelector.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/theme-selector/ThemeSelector.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/theme-selector/styles.module.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/theme-selector/styles.module.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/db.rs" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/db.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/handlers.rs" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/handlers.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/models.rs" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/models.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/atomic/Button/styles.module.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/atomic/Button/styles.module.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/auth/login-form/LoginForm.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/auth/login-form/LoginForm.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/client-layout/ClientLayout.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/client-layout/ClientLayout.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/client-layout/styles.module.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/client-layout/styles.module.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/header/Header.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/header/Header.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/header/styles.module.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/header/styles.module.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/stores/authStore.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/stores/authStore.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/styles/globals.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/styles/globals.scss" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -99,6 +99,7 @@
 }]]></component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$" />
       <recent name="$PROJECT_DIR$/src/atomic/Button" />
     </key>
   </component>
@@ -129,7 +130,7 @@
       <updated>1783577695320</updated>
       <workItem from="1783577696509" duration="17428000" />
       <workItem from="1783717763796" duration="252000" />
-      <workItem from="1783718034401" duration="35142000" />
+      <workItem from="1783718034401" duration="44483000" />
     </task>
     <task id="LOCAL-00001" summary="added new changes">
       <option name="closed" value="true" />
@@ -195,7 +196,15 @@
       <option name="project" value="LOCAL" />
       <updated>1784037540781</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="- added form-base&#10;- splitted view of register account">
+      <option name="closed" value="true" />
+      <created>1784069074497</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1784069074497</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -213,7 +222,8 @@
     <MESSAGE value="- added forgot password, reset password&#10;- fixed styling" />
     <MESSAGE value="- added partial scss&#10;- refactored several logic&#10;- added several column on DB" />
     <MESSAGE value="- refactored to use Button, Input component&#10;- removed redundant css" />
-    <option name="LAST_COMMIT_MESSAGE" value="- refactored to use Button, Input component&#10;- removed redundant css" />
+    <MESSAGE value="- added form-base&#10;- splitted view of register account" />
+    <option name="LAST_COMMIT_MESSAGE" value="- added form-base&#10;- splitted view of register account" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

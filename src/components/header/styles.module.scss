@@ -4,7 +4,6 @@
 .header {
   background: $primary-color;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-  color: white;
   padding: 1.5rem 1.25rem;
 }
 
@@ -15,36 +14,28 @@
 .title {
   font-size: 2rem;
   font-weight: 700;
+
+  a {
+    color: white;
+  }
 }
 
-.actions {
+.actions,
+.usermenu {
   @include flex($align: center, $gap: 1rem);
 }
 
-.userMenu {
-  @include flex($align: center, $gap: 1rem);
-  gap: 1rem;
-}
-
-.userName {
+.username {
   font-weight: 600;
 }
 
-.logoutBtn {
+.btn-logout,
+.btn-switch {
   background: rgba(255, 255, 255, 0.2);
   border: 1px solid rgba(255, 255, 255, 0.3);
-  border-radius: $border-radius;
-  color: white;
-  cursor: pointer;
-  padding: 0.5rem 1rem;
-  transition: $transition;
+  transition: all 0.3s ease;
 
   &:hover {
     background: rgba(255, 255, 255, 0.3);
   }
-}
-
-.guestText {
-  font-size: 0.875rem;
-  opacity: 0.8;
 }

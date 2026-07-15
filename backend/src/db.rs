@@ -1,31 +1,22 @@
 use sqlx::PgPool;
-use crate::models::{User, CreateUserRequest};
+use crate::models::{User, TenantProfile, CreateUserRequest};
 use uuid::Uuid;
 use chrono::{Utc, Duration};
 use argon2::{password_hash::{rand_core::OsRng, PasswordHash, PasswordHasher, PasswordVerifier, SaltString}, Argon2};
 use rand::Rng;
 
-fn make_slug(name: &str) -> String { name.to_lowercase().replace(' ', "-") }
-
 pub async fn create_user(pool: &PgPool, req: &CreateUserRequest) -> Result<User, sqlx::Error> {
     let salt = SaltString::generate(&mut OsRng);
     let hash = Argon2::default().hash_password(req.password.as_bytes(), &salt).expect("hash").to_string();
-    let is_tenant = req.tenant_type.is_some();
-    let slug = if is_tenant { Some(make_slug(&req.name)) } else { None };
-
     sqlx::query_as::<_, User>(
-        "INSERT INTO users (email, password_hash, name, phone, tenant_type, is_tenant, slug, theme) VALUES ($1, $2, $3, $4, $5, $6, $7, 'light') RETURNING *"
+        "INSERT INTO users (email, password_hash, name, theme) VALUES ($1, $2, $3, 'light') RETURNING *"
     )
-    .bind(&req.email).bind(&hash).bind(&req.name).bind(&req.phone).bind(&req.tenant_type).bind(is_tenant).bind(&slug)
+    .bind(&req.email).bind(&hash).bind(&req.name)
     .fetch_one(pool).await
 }
 
 pub async fn get_user_by_email(pool: &PgPool, email: &str) -> Result<User, sqlx::Error> {
     sqlx::query_as::<_, User>("SELECT * FROM users WHERE email = $1").bind(email).fetch_one(pool).await
-}
-
-pub async fn get_user_by_phone(pool: &PgPool, phone: &str) -> Result<User, sqlx::Error> {
-    sqlx::query_as::<_, User>("SELECT * FROM users WHERE phone = $1").bind(phone).fetch_one(pool).await
 }
 
 pub async fn get_user_by_id(pool: &PgPool, id: Uuid) -> Result<User, sqlx::Error> {
@@ -60,15 +51,6 @@ pub async fn get_user_by_reset_token(pool: &PgPool, token: &str) -> Result<User,
         .bind(token).fetch_one(pool).await
 }
 
-pub async fn upgrade_to_tenant(pool: &PgPool, user_id: Uuid, tenant_type: &Option<String>, phone: &Option<String>) -> Result<User, sqlx::Error> {
-    let slug = format!("tenant-{}", &user_id.to_string()[..8]);
-    sqlx::query_as::<_, User>(
-        "UPDATE users SET is_tenant = true, tenant_type = COALESCE($1, tenant_type), phone = COALESCE($2, phone), slug = COALESCE($3, slug) WHERE id = $4 RETURNING *"
-    )
-    .bind(tenant_type).bind(phone).bind(Some(slug)).bind(user_id)
-    .fetch_one(pool).await
-}
-
 pub async fn update_login_meta(pool: &PgPool, user_id: Uuid, browser: &str, device: &str) -> Result<(), sqlx::Error> {
     sqlx::query("UPDATE users SET last_login_at = NOW(), browser = $1, device = $2 WHERE id = $3")
         .bind(browser).bind(device).bind(user_id).execute(pool).await?;
@@ -80,4 +62,35 @@ pub async fn add_report(pool: &PgPool, user_id: Uuid) -> Result<(), sqlx::Error>
     sqlx::query("UPDATE users SET flag = CASE WHEN report_count > 250 THEN 'red' WHEN report_count > 50 THEN 'yellow' ELSE flag END WHERE id = $1")
         .bind(user_id).execute(pool).await?;
     Ok(())
+}
+
+pub async fn create_tenant_profile(pool: &PgPool, user_id: Uuid, tenant_type: &str, phone: Option<&str>, category: Option<&str>) -> Result<TenantProfile, sqlx::Error> {
+    let slug = format!("tenant-{}", &user_id.to_string()[..8]);
+    let account_type = category.map(|_| "place").unwrap_or("individual");
+    sqlx::query_as::<_, TenantProfile>(
+        "INSERT INTO tenant_profiles (user_id, tenant_type, phone, slug, category, account_type) VALUES ($1, $2, $3, $4, $5, $6) RETURNING *"
+    )
+    .bind(user_id).bind(tenant_type).bind(phone).bind(&slug).bind(category).bind(account_type)
+    .fetch_one(pool).await
+}
+
+pub async fn get_tenant_by_user_id(pool: &PgPool, user_id: Uuid) -> Result<TenantProfile, sqlx::Error> {
+    sqlx::query_as::<_, TenantProfile>("SELECT * FROM tenant_profiles WHERE user_id = $1").bind(user_id).fetch_one(pool).await
+}
+
+pub async fn get_tenant_by_slug(pool: &PgPool, slug: &str) -> Result<TenantProfile, sqlx::Error> {
+    sqlx::query_as::<_, TenantProfile>("SELECT * FROM tenant_profiles WHERE slug = $1").bind(slug).fetch_one(pool).await
+}
+
+pub async fn record_login_attempt(pool: &PgPool, email: &str, ip: Option<String>, user_agent: Option<String>, success: bool, failure_reason: Option<&str>) -> Result<(), sqlx::Error> {
+    sqlx::query("INSERT INTO login_attempts (email, ip_address, user_agent, success, failure_reason) VALUES ($1, $2::INET, $3, $4, $5)")
+    .bind(email).bind(ip).bind(user_agent).bind(success).bind(failure_reason)
+    .execute(pool).await?;
+    Ok(())
+}
+
+pub async fn count_recent_failed_attempts(pool: &PgPool, email: &str) -> Result<i32, sqlx::Error> {
+    let count: (i32,) = sqlx::query_as("SELECT count_recent_failed_attempts($1)")
+    .bind(email).fetch_one(pool).await?;
+    Ok(count.0)
 }

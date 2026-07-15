@@ -5,3 +5,10 @@
   position: relative;
   @include flex($align: center, $justify: center);
 }
+
+.themeWrapper {
+  position: fixed;
+  bottom: 1.5rem;
+  right: 1.5rem;
+  z-index: 100;
+}
