@@ -1,6 +1,6 @@
 "use client";
 
-import { type InputHTMLAttributes, useState } from "react";
+import { type InputHTMLAttributes, useEffect, useState } from "react";
 import styles from "./styles.module.scss";
 
 type InputProps = InputHTMLAttributes<HTMLInputElement> & {
@@ -23,8 +23,21 @@ const Input = ({
 }: InputProps) => {
   const [internalValue, setInternalValue] = useState(value || "");
   const [showPassword, setShowPassword] = useState(false);
+
+  useEffect(() => {
+    setInternalValue(value || "");
+  }, [value]);
+  
+  useEffect(() => {
+    setInternalValue(value || "");
+  }, [value]);
+  const [showPassword, setShowPassword] = useState(false);
   const isPassword = type === "password";
   const inputType = isPassword && showPassword ? "text" : type;
+
+  useEffect(() => {
+    setInternalValue(value || "");
+  }, [value]);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (type === "checkbox") {

@@ -3,6 +3,10 @@ export const config = {
     name: "RSVP App",
     version: "1.0.0",
   },
+  currency: {
+    default: "IDR" as const,
+    options: ["IDR", "USD", "CNY"] as const,
+  },
   database: {
     host: "localhost",
     maxConnections: 5,
@@ -15,6 +19,10 @@ export const config = {
   jwt: {
     expirationHours: 24,
     secret: "your-super-secret-jwt-key-change-in-production",
+  },
+  locale: {
+    default: "id" as const,
+    fallback: "id" as const,
   },
   password: {
     minLength: 8,
@@ -44,4 +52,5 @@ export const config = {
 } as const;
 
 export type Config = typeof config;
+export type CurrencyCode = (typeof config.currency.options)[number];
 export default config;

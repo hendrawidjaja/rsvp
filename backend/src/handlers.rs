@@ -43,7 +43,7 @@ async fn login(state: web::Data<AppState>, req: HttpRequest, body: web::Json<Log
     let user_result = db::get_user_by_email(&state.db, &body.email).await;
     match user_result {
         Ok(user) => {
-            if !db::verify_password(&body.password, &user.password_hash).await {
+            if !db::verify_password(&body.password, &user.password_hash) {
                 let _ = db::record_login_attempt(&state.db, &body.email, ip, user_agent, false, Some("invalid_password")).await;
                 return Err(AppError::Unauthorized);
             }
@@ -73,7 +73,7 @@ async fn login_as_provider(state: web::Data<AppState>, req: HttpRequest, body: w
     match user_result {
         Ok(user) => {
             log::info!("User found: {}", user.id);
-            if !db::verify_password(&body.password, &user.password_hash).await {
+            if !db::verify_password(&body.password, &user.password_hash) {
                 log::warn!("Invalid password for provider login: {}", body.email);
                 let _ = db::record_login_attempt(&state.db, &body.email, ip, user_agent, false, Some("invalid_password")).await;
                 return Err(AppError::Unauthorized);
@@ -163,12 +163,12 @@ async fn get_provider_dashboard(state: web::Data<AppState>, req: HttpRequest) ->
     let user_id = auth::extract_user_id(&req, &state.config)?;
     let tenant: TenantProfile = db::get_tenant_by_user_id(&state.db, user_id).await?;
     let service_count: i64 = sqlx::query_scalar("SELECT COUNT(*) FROM services WHERE account_id = $1")
-        .bind(tenant.id)
+        .bind(tenant_profile.id)
         .fetch_one(&state.db)
         .await
         .unwrap_or(0);
     let booking_count: i64 = sqlx::query_scalar("SELECT COUNT(*) FROM bookings WHERE account_id = $1")
-        .bind(tenant.id)
+        .bind(tenant.account_id)
         .fetch_one(&state.db)
         .await
         .unwrap_or(0);

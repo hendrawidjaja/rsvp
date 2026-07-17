@@ -1,14 +1,15 @@
+@use "../../styles/variables" as *;
 @use "../../styles/partial/flex" as *;
 
 .main {
-  height: 100vh;
+  min-height: 100vh;
+  padding: 1rem;
   position: relative;
-  @include flex($align: center, $justify: center);
 }
 
-.themeWrapper {
-  position: fixed;
+.theme-wrapper {
   bottom: 1.5rem;
+  position: fixed;
   right: 1.5rem;
   z-index: 100;
 }

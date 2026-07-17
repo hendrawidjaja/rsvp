@@ -38,7 +38,7 @@ export default function ClientLayout({ children }: { children: ReactNode }) {
     <>
       <Header />
       <main className={styles.main}>{children}</main>
-      <div className={styles.themeWrapper}>
+      <div className={styles["theme-wrapper"]}>
         <ThemeSelector variant="icon" />
       </div>
     </>

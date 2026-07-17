@@ -23,7 +23,7 @@ pub async fn get_user_by_id(pool: &PgPool, id: Uuid) -> Result<User, sqlx::Error
     sqlx::query_as::<_, User>("SELECT * FROM users WHERE id = $1").bind(id).fetch_one(pool).await
 }
 
-pub async fn verify_password(password: &str, hash: &str) -> bool {
+pub fn verify_password(password: &str, hash: &str) -> bool {
     PasswordHash::new(hash).map(|h| Argon2::default().verify_password(password.as_bytes(), &h).is_ok()).unwrap_or(false)
 }
 
@@ -67,10 +67,31 @@ pub async fn add_report(pool: &PgPool, user_id: Uuid) -> Result<(), sqlx::Error>
 pub async fn create_tenant_profile(pool: &PgPool, user_id: Uuid, tenant_type: &str, phone: Option<&str>, category: Option<&str>) -> Result<TenantProfile, sqlx::Error> {
     let slug = format!("tenant-{}", &user_id.to_string()[..8]);
     let account_type = category.map(|_| "place").unwrap_or("individual");
-    sqlx::query_as::<_, TenantProfile>(
-        "INSERT INTO tenant_profiles (user_id, tenant_type, phone, slug, category, account_type) VALUES ($1, $2, $3, $4, $5, $6) RETURNING *"
+
+    // Get user email for accounts table
+    let user: User = sqlx::query_as::<_, User>("SELECT * FROM users WHERE id = $1")
+        .bind(user_id)
+        .fetch_one(pool)
+        .await?;
+
+    // Create accounts record
+    let account_id: Uuid = sqlx::query_scalar(
+        "INSERT INTO accounts (email, password_hash, name, slug, category, account_type)
+         VALUES ($1, $2, $3, $4, $5, $6) RETURNING id"
     )
-    .bind(user_id).bind(tenant_type).bind(phone).bind(&slug).bind(category).bind(account_type)
+    .bind(&user.email)
+    .bind(&user.password_hash)
+    .bind(&user.name)
+    .bind(&slug)
+    .bind(category.unwrap_or(tenant_type))
+    .bind(account_type)
+    .fetch_one(pool)
+    .await?;
+
+    sqlx::query_as::<_, TenantProfile>(
+        "INSERT INTO tenant_profiles (user_id, tenant_type, phone, slug, category, account_type, account_id) VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING *"
+    )
+    .bind(user_id).bind(tenant_type).bind(phone).bind(&slug).bind(category).bind(account_type).bind(account_id)
     .fetch_one(pool).await
 }
 
