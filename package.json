@@ -1,16 +1,5 @@
 {
-  "name": "rsvp-app",
-  "version": "1.0.0",
-  "private": true,
-  "scripts": {
-    "dev": "bun next dev",
-    "build": "bun next build",
-    "start": "bun next start",
-    "lint": "biome check .",
-    "format": "biome format --write ."
-  },
   "dependencies": {
-    "clsx": "^2.1.1",
     "jose": "^5.10.0",
     "next": "16.2.10",
     "react": "^19.2.7",
@@ -26,5 +15,15 @@
     "@types/react-dom": "^19.2.3",
     "sass": "^1.101.0",
     "typescript": "5.9.3"
-  }
+  },
+  "name": "rsvp-app",
+  "private": true,
+  "scripts": {
+    "build": "bun next build",
+    "dev": "bun next dev",
+    "format": "biome format --write .",
+    "lint": "biome check .",
+    "start": "bun next start"
+  },
+  "version": "1.0.0"
 }

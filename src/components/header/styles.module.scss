@@ -1,8 +1,7 @@
-@use "../../styles/variables" as *;
 @use "../../styles/partial/flex" as *;
 
 .header {
-  background: $primary-color;
+  background: var(--primary-color);
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
   padding: 1.5rem 1.25rem;
 }
@@ -14,10 +13,6 @@
 .title {
   font-size: 2rem;
   font-weight: 700;
-
-  a {
-    color: white;
-  }
 }
 
 .actions,

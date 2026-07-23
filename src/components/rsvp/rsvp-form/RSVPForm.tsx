@@ -51,15 +51,24 @@ export default function RSVPForm({ editingId, onCancel }: RSVPFormProps) {
     setErrors({});
     try {
       const validatedData = rsvpFormSchema.parse(formData);
-      if (editingId) updateRSVP(editingId, validatedData);
-      else addRSVP(validatedData);
+      if (editingId) {
+        updateRSVP(editingId, validatedData);
+      } else {
+        addRSVP(validatedData);
+      }
       setFormData(INITIAL_FORM_DATA);
-      if (onCancel) onCancel();
+      if (onCancel) {
+        onCancel();
+      }
     } catch (error) {
       if (error instanceof Error && "errors" in error) {
-        const zodError = error as { errors: Array<{ path: string[]; message: string }> };
+        const zodError = error as {
+          errors: Array<{ path: string[]; message: string }>;
+        };
         const newErrors: Record<string, string> = {};
-        zodError.errors.forEach((err) => { newErrors[err.path[0]] = err.message; });
+        zodError.errors.forEach((err) => {
+          newErrors[err.path[0]] = err.message;
+        });
         setErrors(newErrors);
       }
     } finally {
@@ -67,43 +76,113 @@ export default function RSVPForm({ editingId, onCancel }: RSVPFormProps) {
     }
   };
 
-  const handleChange = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+  const handleChange = (
+    e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
+  ) => {
     const { name, value, type } = e.target;
     if (type === "checkbox") {
       const checked = (e.target as HTMLInputElement).checked;
-      setFormData((prev) => ({ ...prev, [name]: checked, ...(name === "attending" && !checked ? { guests: 0 } : {}) }));
+      setFormData((prev) => ({
+        ...prev,
+        [name]: checked,
+        ...(name === "attending" && !checked ? { guests: 0 } : {}),
+      }));
     } else if (type === "number") {
       setFormData((prev) => ({ ...prev, [name]: parseInt(value) || 0 }));
     } else {
       setFormData((prev) => ({ ...prev, [name]: value }));
     }
-    if (errors[name]) setErrors((prev) => { const n = { ...prev }; delete n[name]; return n; });
+    if (errors[name]) {
+      setErrors((prev) => {
+        const n = { ...prev };
+        delete n[name];
+        return n;
+      });
+    }
   };
 
   return (
     <form className={styles.form} onSubmit={handleSubmit}>
       <h2>{editingId ? "Edit RSVP" : "Submit RSVP"}</h2>
 
-      <Input id="rsvp-name" label="Name *" name="name" value={formData.name} onChange={handleChange} error={errors.name} placeholder="Enter your full name" type="text" />
-      <Input id="rsvp-email" label="Email *" name="email" value={formData.email} onChange={handleChange} error={errors.email} placeholder="your.email@example.com" type="email" />
-      <Input id="rsvp-attending" label="I will attend the event" name="attending" checked={formData.attending} onChange={handleChange} type="checkbox" />
+      <Input
+        error={errors.name}
+        id="rsvp-name"
+        label="Name *"
+        name="name"
+        onChange={handleChange}
+        placeholder="Enter your full name"
+        type="text"
+        value={formData.name}
+      />
+
+      <Input
+        error={errors.email}
+        id="rsvp-email"
+        label="Email *"
+        name="email"
+        onChange={handleChange}
+        placeholder="your.email@example.com"
+        type="email"
+        value={formData.email}
+      />
+      <Input
+        checked={formData.attending}
+        id="rsvp-attending"
+        label="I will attend the event"
+        name="attending"
+        onChange={handleChange}
+        type="checkbox"
+      />
 
       {formData.attending && (
-        <Input id="rsvp-guests" label="Number of Additional Guests" name="guests" value={formData.guests} onChange={handleChange} error={errors.guests} type="number" min="0" max="10" />
+        <Input
+          error={errors.guests}
+          id="rsvp-guests"
+          label="Number of Additional Guests"
+          max="10"
+          min="0"
+          name="guests"
+          onChange={handleChange}
+          type="number"
+          value={formData.guests}
+        />
       )}
 
       <div className={styles.field}>
-        <label htmlFor="rsvp-dietary">Dietary Restrictions / Special Requests</label>
-        <textarea id="rsvp-dietary" name="dietaryRestrictions" className={styles.textarea} value={formData.dietaryRestrictions} onChange={handleChange} placeholder="Let us know..." />
-        {errors.dietaryRestrictions && <span className={styles.fieldError}>{errors.dietaryRestrictions}</span>}
+        <label htmlFor="rsvp-dietary">
+          Dietary Restrictions / Special Requests
+        </label>
+        <textarea
+          className={styles.textarea}
+          id="rsvp-dietary"
+          name="dietaryRestrictions"
+          onChange={handleChange}
+          placeholder="Let us know..."
+          value={formData.dietaryRestrictions}
+        />
+        {errors.dietaryRestrictions && (
+          <span className={styles.fieldError}>
+            {errors.dietaryRestrictions}
+          </span>
+        )}
       </div>
 
       <div className={styles.actions}>
-        <Button ariaLabel="Submit" type="submit" disabled={isSubmitting}>
-          {isSubmitting ? "Submitting..." : editingId ? "Update RSVP" : "Submit RSVP"}
+        <Button ariaLabel="Submit" disabled={isSubmitting} type="submit">
+          {isSubmitting
+            ? "Submitting..."
+            : editingId
+              ? "Update RSVP"
+              : "Submit RSVP"}
         </Button>
         {editingId && onCancel && (
-          <Button ariaLabel="Cancel" className={styles.cancelBtn} onClick={onCancel} type="button">
+          <Button
+            ariaLabel="Cancel"
+            className={styles.cancelBtn}
+            onClick={onCancel}
+            type="button"
+          >
             Cancel
           </Button>
         )}

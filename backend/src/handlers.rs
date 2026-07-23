@@ -66,9 +66,9 @@ async fn login_as_provider(state: web::Data<AppState>, req: HttpRequest, body: w
     }
     let ip = req.peer_addr().map(|addr| addr.ip().to_string());
     let user_agent = req.headers().get("User-Agent").and_then(|h| h.to_str().ok()).map(|s| s.to_string());
-    
+
     log::info!("Provider login attempt for: {}", body.email);
-    
+
     let user_result = db::get_user_by_email(&state.db, &body.email).await;
     match user_result {
         Ok(user) => {
@@ -93,6 +93,8 @@ async fn login_as_provider(state: web::Data<AppState>, req: HttpRequest, body: w
                     return Err(e.into());
                 }
             };
+            // NOTE: Not having a tenant profile is NOT a failed login attempt
+            // It's an authorization issue, not an authentication failure
             if tenant.is_none() {
                 return Err(AppError::BadRequest("You don't have a provider account. Please register as a provider first.".into()));
             }
@@ -163,12 +165,12 @@ async fn get_provider_dashboard(state: web::Data<AppState>, req: HttpRequest) ->
     let user_id = auth::extract_user_id(&req, &state.config)?;
     let tenant: TenantProfile = db::get_tenant_by_user_id(&state.db, user_id).await?;
     let service_count: i64 = sqlx::query_scalar("SELECT COUNT(*) FROM services WHERE account_id = $1")
-        .bind(tenant_profile.id)
+        .bind(tenant.id)
         .fetch_one(&state.db)
         .await
         .unwrap_or(0);
     let booking_count: i64 = sqlx::query_scalar("SELECT COUNT(*) FROM bookings WHERE account_id = $1")
-        .bind(tenant.account_id)
+        .bind(tenant.id)
         .fetch_one(&state.db)
         .await
         .unwrap_or(0);

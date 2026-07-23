@@ -1,15 +1,6 @@
-@use "../../styles/variables" as *;
 @use "../../styles/partial/flex" as *;
 
 .main {
-  min-height: 100vh;
-  padding: 1rem;
-  position: relative;
-}
-
-.theme-wrapper {
-  bottom: 1.5rem;
-  position: fixed;
-  right: 1.5rem;
-  z-index: 100;
+  @include flex($direction: column);
+  height: 100vh;
 }

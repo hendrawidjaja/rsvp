@@ -9,6 +9,7 @@ interface User {
   name: string;
   theme: string;
 }
+
 interface Tenant {
   account_type: string;
   id: string;
@@ -85,16 +86,21 @@ export const useAuthStore = create<AuthState>()(
       isLoading: false,
       isProvider: false,
       login: async (email, password) => {
+        console.log("[login] attempting with email:", email, "password length:", password.length);
         set({ error: null, isLoading: true });
         try {
+          const body = JSON.stringify({ email, password });
+          console.log("[login] request body:", body);
           const res = await fetch(`${API_URL}/auth/login`, {
-            body: JSON.stringify({ email, password }),
+            body,
             headers: { "Content-Type": "application/json" },
             method: "POST",
           });
+          console.log("[login] response status:", res.status);
           const data = await res.json();
+          console.log("[login] response data:", data);
           if (!res.ok) {
-            throw new Error(data.message);
+            throw new Error(data.message || `HTTP ${res.status}`);
           }
           set({
             isAuthenticated: true,
@@ -105,6 +111,7 @@ export const useAuthStore = create<AuthState>()(
             user: data.data.user,
           });
         } catch (err) {
+          console.error("[login] error:", err);
           set({
             error: err instanceof Error ? err.message : "Login failed",
             isLoading: false,
@@ -113,6 +120,7 @@ export const useAuthStore = create<AuthState>()(
         }
       },
       loginAsProvider: async (email, password) => {
+        console.log("[loginAsProvider] attempting with email:", email);
         set({ error: null, isLoading: true });
         try {
           const res = await fetch(`${API_URL}/auth/login/provider`, {
@@ -120,9 +128,11 @@ export const useAuthStore = create<AuthState>()(
             headers: { "Content-Type": "application/json" },
             method: "POST",
           });
+          console.log("[loginAsProvider] response status:", res.status);
           const data = await res.json();
+          console.log("[loginAsProvider] response data:", data);
           if (!res.ok) {
-            throw new Error(data.message);
+            throw new Error(data.message || `HTTP ${res.status}`);
           }
           set({
             isAuthenticated: true,
@@ -133,6 +143,7 @@ export const useAuthStore = create<AuthState>()(
             user: data.data.user,
           });
         } catch (err) {
+          console.error("[loginAsProvider] error:", err);
           set({
             error: err instanceof Error ? err.message : "Provider login failed",
             isLoading: false,
@@ -150,6 +161,7 @@ export const useAuthStore = create<AuthState>()(
         }),
 
       register: async (email, password, name) => {
+        console.log("[register] attempting with email:", email);
         set({ error: null, isLoading: true });
         try {
           const res = await fetch(`${API_URL}/auth/register`, {
@@ -157,10 +169,11 @@ export const useAuthStore = create<AuthState>()(
             headers: { "Content-Type": "application/json" },
             method: "POST",
           });
-
+          console.log("[register] response status:", res.status);
           const data = await res.json();
+          console.log("[register] response data:", data);
           if (!res.ok) {
-            throw new Error(data.message);
+            throw new Error(data.message || `HTTP ${res.status}`);
           }
 
           set({
@@ -170,6 +183,7 @@ export const useAuthStore = create<AuthState>()(
             user: data.data.user,
           });
         } catch (err) {
+          console.error("[register] error:", err);
           set({
             error: err instanceof Error ? err.message : "Registration failed",
             isLoading: false,
@@ -234,9 +248,6 @@ export const useAuthStore = create<AuthState>()(
                 set({ tenant: d.data });
               }
             })
-            .catch((err) => {
-              console.error("Failed to fetch tenant:", err);
-            });
             .catch((err) => {
               console.error("Failed to fetch tenant:", err);
             });

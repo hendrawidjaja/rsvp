@@ -1,6 +1,12 @@
 "use client";
 
-import { type InputHTMLAttributes, useEffect, useState } from "react";
+import {
+  type ChangeEvent,
+  type InputHTMLAttributes,
+  useEffect,
+  useState,
+} from "react";
+import { cx } from "@/lib/utils";
 import styles from "./styles.module.scss";
 
 type InputProps = InputHTMLAttributes<HTMLInputElement> & {
@@ -27,11 +33,11 @@ const Input = ({
   useEffect(() => {
     setInternalValue(value || "");
   }, [value]);
-  
+
   useEffect(() => {
     setInternalValue(value || "");
   }, [value]);
-  const [showPassword, setShowPassword] = useState(false);
+
   const isPassword = type === "password";
   const inputType = isPassword && showPassword ? "text" : type;
 
@@ -39,7 +45,7 @@ const Input = ({
     setInternalValue(value || "");
   }, [value]);
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     if (type === "checkbox") {
       onChange?.(e);
       return;
@@ -52,13 +58,13 @@ const Input = ({
     setInternalValue("");
     onChange?.({
       target: { value: "" },
-    } as React.ChangeEvent<HTMLInputElement>);
+    } as ChangeEvent<HTMLInputElement>);
     onClear?.();
   };
 
   if (type === "checkbox") {
     return (
-      <div className={`${styles.checkbox} ${className ?? ""}`}>
+      <div className={cx(styles.checkbox, className)}>
         <input
           checked={checked}
           id={id}
@@ -71,20 +77,12 @@ const Input = ({
     );
   }
 
-  const inputClass = [styles.input, error && styles.inputError]
-    .filter(Boolean)
-    .join(" ");
-
-  const containerClass = [styles.container, className]
-    .filter(Boolean)
-    .join(" ");
-
   return (
-    <div className={containerClass}>
+    <div className={cx(styles.container, className)}>
       {label ? <label htmlFor={id}>{label}</label> : null}
       <div className={styles.wrapper}>
         <input
-          className={inputClass}
+          className={cx(styles.input, error && styles.inputError)}
           id={id}
           onChange={handleChange}
           type={inputType}

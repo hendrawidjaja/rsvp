@@ -1,9 +1,9 @@
 "use client";
 
 import { useState } from "react";
-import { useRSVPStore } from "@/stores/rsvpStore";
-import RSVPForm from "@/components/rsvp/rsvp-form/RSVPForm";
 import RSVPCard from "@/components/rsvp/rsvp-card/RSVPCard";
+import RSVPForm from "@/components/rsvp/rsvp-form/RSVPForm";
+import { useRSVPStore } from "@/stores/rsvpStore";
 import styles from "./styles.module.scss";
 
 export default function RSVPList() {
@@ -13,7 +13,7 @@ export default function RSVPList() {
 
   const handleEdit = (id: string) => {
     setEditingId(id);
-    window.scrollTo({ top: 0, behavior: "smooth" });
+    window.scrollTo({ behavior: "smooth", top: 0 });
   };
 
   const handleCancelEdit = () => {
@@ -43,13 +43,14 @@ export default function RSVPList() {
       {editingId && (
         <RSVPForm editingId={editingId} onCancel={handleCancelEdit} />
       )}
+
       <div className={styles.list}>
         {rsvps.map((rsvp) => (
           <RSVPCard
             key={rsvp.id}
-            rsvp={rsvp}
-            onEdit={handleEdit}
             onDelete={handleDelete}
+            onEdit={handleEdit}
+            rsvp={rsvp}
           />
         ))}
       </div>

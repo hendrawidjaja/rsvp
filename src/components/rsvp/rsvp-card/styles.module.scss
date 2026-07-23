@@ -1,49 +1,26 @@
-@use "../../../styles/variables" as *;
 @use "../../../styles/partial/flex" as *;
 
 .card {
-  background: $card-background;
-  border-left: 4px solid $primary-color;
-  border-radius: $border-radius;
+  @include flex($align: center, $justify: space-between, $gap: 1rem);
+  background: var(--background);
+  border: 1px solid var(--border);
+  border-radius: var(--border-radius);
+  box-shadow: var(--shadow-sm);
   padding: 1rem;
-  transition: $transition;
+}
 
-  &:hover {
-    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
-    transform: translateY(-2px);
-  }
-
-  &.notAttending {
-    border-left-color: $secondary-color;
-  }
+.info {
+  @include flex($gap: 0.25rem, $direction: column);
+  flex: 1;
 }
 
 .name {
-  color: $text-color;
-  margin-bottom: 0.5rem;
+  color: var(--foreground);
+  font-size: 1rem;
+  font-weight: 600;
 }
 
 .detail {
-  color: $text-muted;
-  margin-bottom: 0.5rem;
-}
-
-.status {
-  font-weight: 600; }
-
-.actions {
-  @include flex($gap: 0.5rem);
-  margin-top: 1rem;
-}
-
-.editBtn {
-  background: $secondary-color;
+  color: #666;
   font-size: 0.875rem;
-  padding: 0.5rem 1rem;
-}
-
-.deleteBtn {
-  background: $danger-color;
-  font-size: 0.875rem;
-  padding: 0.5rem 1rem;
 }

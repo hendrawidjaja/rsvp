@@ -19,7 +19,7 @@ export default function ClientLayout({ children }: { children: ReactNode }) {
       });
     }
     applyTheme();
-    fetchUser();
+    fetchUser().then(() => {});
   }, [fetchUser, applyTheme]);
 
   useEffect(() => {
@@ -37,7 +37,9 @@ export default function ClientLayout({ children }: { children: ReactNode }) {
   return (
     <>
       <Header />
+
       <main className={styles.main}>{children}</main>
+
       <div className={styles["theme-wrapper"]}>
         <ThemeSelector variant="icon" />
       </div>

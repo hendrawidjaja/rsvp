@@ -14,7 +14,8 @@ const Select = ({ label, options, id, className, ...props }: SelectProps) => {
   return (
     <div className={containerClass}>
       {label ? <label htmlFor={id}>{label}</label> : null}
-      <select id={id} className={styles.select} {...props}>
+
+      <select className={styles.select} id={id} {...props}>
         {options.map(({ value, label }) => (
           <option key={value} value={value}>
             {label}

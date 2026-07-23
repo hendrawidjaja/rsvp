@@ -1,6 +1,5 @@
-@use "../../../styles/variables" as *;
-@use "../../../styles/partial/form" as *;
 @use "../../../styles/partial/flex" as *;
+@use "../../../styles/variables" as *;
 
 .form {
   @include form-base;

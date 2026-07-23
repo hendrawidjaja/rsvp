@@ -42,6 +42,7 @@ export default function Header() {
                 {isProvider ? "Switch to User" : "Switch to Provider"}
               </Button>
             )}
+
             <Button
               ariaLabel="btn-logout"
               className={styles["btn-logout"]}
