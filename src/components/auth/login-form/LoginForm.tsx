@@ -107,9 +107,7 @@ export default function LoginForm() {
             : "Login"}
       </Button>
 
-      <p className={styles["forgot-link"]}>
-        <Link href="/forgot-password">Forgot password?</Link>
-      </p>
+      <Link href="/forgot-password">Forgot password?</Link>
     </form>
   );
 }

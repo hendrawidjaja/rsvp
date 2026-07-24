@@ -11,36 +11,27 @@
     </cargoProject>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="44d81e7d-5ab9-4975-9852-8a66c0da2d14" name="Changes" comment="- added service provider account&#10;- able to switch from provider account to normal account&#10;- fixed several styling">
-      <change afterPath="$PROJECT_DIR$/fix.sh" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/lib/i18n.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/lib/utils.ts" afterDir="false" />
+    <list default="true" id="44d81e7d-5ab9-4975-9852-8a66c0da2d14" name="Changes" comment="- fixed styling">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/handlers.rs" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/handlers.rs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/biome.json" beforeDir="false" afterPath="$PROJECT_DIR$/biome.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/atomic/Button/Button.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/atomic/Button/Button.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/atomic/Button/styles.module.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/atomic/Button/styles.module.scss" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/atomic/Input/Input.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/atomic/Input/Input.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/atomic/Input/styles.module.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/atomic/Input/styles.module.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/atomic/Select/Select.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/atomic/Select/Select.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/atomic/Select/styles.module.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/atomic/Select/styles.module.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/auth/auth-page/AuthPage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/auth/auth-page/AuthPage.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/auth/login-form/LoginForm.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/auth/login-form/LoginForm.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/auth/register-form/styles.module.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/auth/register-form/styles.module.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/client-layout/ClientLayout.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/client-layout/ClientLayout.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/client-layout/styles.module.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/client-layout/styles.module.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/header/Header.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/header/Header.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/header/styles.module.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/header/styles.module.scss" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/rsvp/rsvp-card/RSVPCard.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/rsvp/rsvp-card/RSVPCard.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/rsvp/rsvp-card/styles.module.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/rsvp/rsvp-card/styles.module.scss" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/rsvp/rsvp-form/RSVPForm.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/rsvp/rsvp-form/RSVPForm.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/rsvp/rsvp-form/styles.module.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/rsvp/rsvp-form/styles.module.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/rsvp/rsvp-list/RSVPList.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/rsvp/rsvp-list/RSVPList.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/stats-display/styles.module.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/stats-display/styles.module.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/theme-selector/ThemeSelector.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/theme-selector/ThemeSelector.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/theme-selector/styles.module.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/theme-selector/styles.module.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/lib/constants.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/constants.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/lib/i18n.ts" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/stores/authStore.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/stores/authStore.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/stores/themeStore.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/stores/themeStore.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/styles/_variables.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/styles/_variables.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/styles/globals.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/styles/globals.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/styles/partial/_flex.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/styles/partial/_flex.scss" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -122,23 +113,6 @@
     </key>
   </component>
   <component name="RunManager" selected="npm.Next.js: server-side">
-    <configuration default="true" type="CargoCommandRunConfiguration" factoryName="Cargo Command">
-      <option name="command" value="run" />
-      <option name="workingDirectory" value="file://$PROJECT_DIR$/backend" />
-      <envs />
-      <option name="emulateTerminal" value="true" />
-      <option name="channel" value="DEFAULT" />
-      <option name="requiredFeatures" value="true" />
-      <option name="allFeatures" value="false" />
-      <option name="withSudo" value="false" />
-      <option name="buildTarget" value="REMOTE" />
-      <option name="backtrace" value="SHORT" />
-      <option name="isRedirectInput" value="false" />
-      <option name="redirectInputPath" value="" />
-      <method v="2">
-        <option name="CARGO.BUILD_TASK_PROVIDER" enabled="true" />
-      </method>
-    </configuration>
     <configuration name="Next.js: debug client-side" type="JavascriptDebugType" uri="http://localhost:3000/">
       <method v="2" />
     </configuration>
@@ -166,6 +140,7 @@
       <workItem from="1783577696509" duration="17428000" />
       <workItem from="1783717763796" duration="252000" />
       <workItem from="1783718034401" duration="54175000" />
+      <workItem from="1784866191781" duration="629000" />
     </task>
     <task id="LOCAL-00001" summary="added new changes">
       <option name="closed" value="true" />
@@ -247,7 +222,15 @@
       <option name="project" value="LOCAL" />
       <updated>1784149806787</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="- fixed styling">
+      <option name="closed" value="true" />
+      <created>1784774601538</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1784774601538</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -267,7 +250,8 @@
     <MESSAGE value="- refactored to use Button, Input component&#10;- removed redundant css" />
     <MESSAGE value="- added form-base&#10;- splitted view of register account" />
     <MESSAGE value="- added service provider account&#10;- able to switch from provider account to normal account&#10;- fixed several styling" />
-    <option name="LAST_COMMIT_MESSAGE" value="- added service provider account&#10;- able to switch from provider account to normal account&#10;- fixed several styling" />
+    <MESSAGE value="- fixed styling" />
+    <option name="LAST_COMMIT_MESSAGE" value="- fixed styling" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

@@ -1,29 +1,37 @@
 @use "../../styles/partial/flex" as *;
+@use "../../styles/variables" as *;
+
+.container {
+  @include flex($direction: column, $gap: 0.5rem);
+}
+
+.wrapper {
+  @include flex($align: center);
+}
 
 .label {
-  color: var(--foreground);
-  font-size: 0.875rem;
+  color: var(--card-background);
+  font-size: 1;
   font-weight: 500;
 }
 
 .input {
-  background: var(--background);
-  border: 1px solid var(--border);
+  background: var(--background-color);
+  border: 1px solid var(--border-color);
   border-radius: var(--border-radius);
-  color: var(--foreground);
-  font-size: 0.875rem;
+  color: #ffffff;
+  font-size: 1rem;
   padding: 0.5rem;
   transition: border-color 0.2s ease, box-shadow 0.2s ease;
   width: 100%;
 
   &:focus {
-    border-color: var(--primary);
+    border-color: var(--primary-color);
     box-shadow: 0 0 0 3px rgba(0, 112, 243, 0.1);
-    outline: none;
   }
 
   &::placeholder {
-    color: #999;
+    color: var(--text-muted);
   }
 
   &:disabled {
@@ -33,16 +41,16 @@
 }
 
 .error {
-  border-color: var(--error);
+  border-color: var(--danger-color);
 
   &:focus {
-    border-color: var(--error);
+    border-color: var(--danger-color);
     box-shadow: 0 0 0 3px rgba(224, 0, 0, 0.1);
   }
 }
 
-.errorText {
-  color: var(--error);
+.error-text {
+  color: var(--danger-color);
   font-size: 0.75rem;
 }
 
@@ -50,11 +58,24 @@
   @include flex($align: center, $gap: 0.5rem);
 
   input[type="checkbox"] {
-    accent-color: var(--primary);
+    accent-color: var(--primary-color);
     cursor: pointer;
     height: 1.35rem;
     min-height: 1.35rem;
     min-width: 1.35rem;
     width: 1.35rem;
+  }
+}
+
+.actions {
+  position: absolute;
+  right: 0.5rem;
+
+  button {
+    background: transparent;
+    border: none;
+    color: #ffffff;
+    font-size: 1rem;
+    margin-right: 0.5rem;
   }
 }

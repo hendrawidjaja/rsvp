@@ -82,7 +82,7 @@ const Input = ({
       {label ? <label htmlFor={id}>{label}</label> : null}
       <div className={styles.wrapper}>
         <input
-          className={cx(styles.input, error && styles.inputError)}
+          className={cx(styles.input, error && styles.error)}
           id={id}
           onChange={handleChange}
           type={inputType}
@@ -102,6 +102,7 @@ const Input = ({
               {showPassword ? "🙈" : "👁"}
             </button>
           )}
+
           {String(internalValue).length > 2 && (
             <button
               aria-label="Clear input"
@@ -115,7 +116,7 @@ const Input = ({
           )}
         </div>
       </div>
-      {error && <span className={styles.error}>{error}</span>}
+      {error && <span className={styles["error-text"]}>{error}</span>}
     </div>
   );
 };

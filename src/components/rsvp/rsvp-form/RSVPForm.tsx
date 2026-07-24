@@ -88,7 +88,7 @@ export default function RSVPForm({ editingId, onCancel }: RSVPFormProps) {
         ...(name === "attending" && !checked ? { guests: 0 } : {}),
       }));
     } else if (type === "number") {
-      setFormData((prev) => ({ ...prev, [name]: parseInt(value) || 0 }));
+      setFormData((prev) => ({ ...prev, [name]: parseInt(value, 10) || 0 }));
     } else {
       setFormData((prev) => ({ ...prev, [name]: value }));
     }
@@ -126,6 +126,7 @@ export default function RSVPForm({ editingId, onCancel }: RSVPFormProps) {
         type="email"
         value={formData.email}
       />
+
       <Input
         checked={formData.attending}
         id="rsvp-attending"
@@ -153,6 +154,7 @@ export default function RSVPForm({ editingId, onCancel }: RSVPFormProps) {
         <label htmlFor="rsvp-dietary">
           Dietary Restrictions / Special Requests
         </label>
+
         <textarea
           className={styles.textarea}
           id="rsvp-dietary"
@@ -162,7 +164,7 @@ export default function RSVPForm({ editingId, onCancel }: RSVPFormProps) {
           value={formData.dietaryRestrictions}
         />
         {errors.dietaryRestrictions && (
-          <span className={styles.fieldError}>
+          <span className={styles["error-field"]}>
             {errors.dietaryRestrictions}
           </span>
         )}
@@ -179,7 +181,7 @@ export default function RSVPForm({ editingId, onCancel }: RSVPFormProps) {
         {editingId && onCancel && (
           <Button
             ariaLabel="Cancel"
-            className={styles.cancelBtn}
+            className={styles["btn-cancel"]}
             onClick={onCancel}
             type="button"
           >

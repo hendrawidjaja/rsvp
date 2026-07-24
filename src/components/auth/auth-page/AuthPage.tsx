@@ -9,12 +9,12 @@ export default function AuthPage() {
     <div className={styles.container}>
       <LoginForm />
 
-      <p className={styles.wrapper}>
+      <div className={styles.wrapper}>
         Don't have an account?{" "}
         <Link className={styles.link} href="/register">
           Register
         </Link>
-      </p>
+      </div>
     </div>
   );
 }

@@ -82,11 +82,18 @@ export const useAuthStore = create<AuthState>()(
           });
         }
       },
+
       isAuthenticated: false,
       isLoading: false,
       isProvider: false,
+
       login: async (email, password) => {
-        console.log("[login] attempting with email:", email, "password length:", password.length);
+        console.log(
+          "[login] attempting with email:",
+          email,
+          "password length:",
+          password.length,
+        );
         set({ error: null, isLoading: true });
         try {
           const body = JSON.stringify({ email, password });
@@ -119,6 +126,7 @@ export const useAuthStore = create<AuthState>()(
           throw err;
         }
       },
+
       loginAsProvider: async (email, password) => {
         console.log("[loginAsProvider] attempting with email:", email);
         set({ error: null, isLoading: true });
@@ -151,6 +159,7 @@ export const useAuthStore = create<AuthState>()(
           throw err;
         }
       },
+
       logout: () =>
         set({
           isAuthenticated: false,
@@ -191,6 +200,7 @@ export const useAuthStore = create<AuthState>()(
           throw err;
         }
       },
+
       registerAsProvider: async (email, password, name, tenantType, phone) => {
         set({ error: null, isLoading: true });
         try {

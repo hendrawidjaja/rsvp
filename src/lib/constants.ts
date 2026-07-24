@@ -59,9 +59,7 @@ export const ASIAN_COUNTRIES = [
   { code: "+977", flag: "🇳🇵" },
 ] as const;
 
-// biome-ignore lint/suspicious/noRedeclare: future usage
 export type TenantType = (typeof TENANT_TYPES)[number]["value"];
-// biome-ignore lint/suspicious/noRedeclare: <explanation>
 export type Locale = "en" | "id";
 
 export const THEME_OPTIONS = [

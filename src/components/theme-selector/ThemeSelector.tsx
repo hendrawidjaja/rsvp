@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import Button from "@/atomic/Button/Button";
+import { cx } from "@/lib/utils";
 import { useAuthStore } from "@/stores/authStore";
 import { type Theme, useThemeStore } from "@/stores/themeStore";
 import styles from "./styles.module.scss";
@@ -41,12 +42,8 @@ export default function ThemeSelector({
     return null;
   }
 
-  const selectorClass = [styles.selector, variant === "icon" && styles.iconOnly]
-    .filter(Boolean)
-    .join(" ");
-
   return (
-    <div className={selectorClass}>
+    <div className={cx(styles.selector, variant === "icon" && styles.iconOnly)}>
       {themes.map(({ value, icon, label }) => (
         <Button
           ariaLabel={label}
